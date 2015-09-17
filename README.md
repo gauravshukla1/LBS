@@ -5,16 +5,16 @@ Team:	Tauseef Indikar, Nicolas Neitzel, Gaurav Shukla
 
 Title:	Library Management System
 
-Description: A library management portal which helps student or librarian  search, check out books. It has seperate login account for Admin, Librarian and Student with different functionality. It has database support using MySQL.
+Description: A library management portal which helps student or librarian  search, check out books. It has seperate login account for Admin, Librarian and Student with different functionality. It has database support using MSSQLServer.
 
-Platform/Environment: Wicket 7 Apache server for hosting, Front end on HTML,CSS and JQUERY with DB in MySQL
+Platform/Environment: C# for Server Back End, Front end on HTML,CSS and JQUERY with DB in MS SQL
 
 Programming	Languages:
 
-Name	Java	HTML	Javascript	CSS	MySQL
+Name	C#	HTML	Javascript	CSS	MS-SQL
 Tauseef	Beginner	Expert	Intermediate	Expert	Expert
-Nicolas	Expert	Beginner	Beginner	Beginner	Intermediate
-Gaurav	Beginner	Expert	Intermediate	Intermediate	Expert
+Nicolas	Beginner	Beginner	Beginner	Beginner	Intermediate
+Gaurav	Expert	Expert	Intermediate	Intermediate	Expert
 
 Functionality:
 •	Student Signup / Login
