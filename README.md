@@ -1,7 +1,7 @@
 # LMS
 Library Management System
 
-Team:	Tauseef Indikar, Nicolas Neitzel, Gaurav Shukla
+Team:	Tauseef Indikar, Nicolas Neitzel, Gaurav Shukla & Sanketh Shetty
 
 Title:	Library Management System
 
