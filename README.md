@@ -7,7 +7,7 @@ Title:	Library Management System
 
 Description: A library management portal which helps student or librarian  search, check out books. It has seperate login account for Admin, Librarian and Student with different functionality. It has database support using MSSQLServer.
 
-Platform/Environment: C# for Server Back End, Front end on HTML,CSS and JQUERY with DB in MS SQL
+Platform/Environment: C# for programming and implementing OOPs concepts, Front end on HTML,CSS and JQUERY with DB in MS SQL
 
 Programming	Languages:
 
