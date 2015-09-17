@@ -1,4 +1,4 @@
-# LBS
+# LMS
 Library Management System
 
 Team:	Tauseef Indikar, Nicolas Neitzel, Gaurav Shukla
