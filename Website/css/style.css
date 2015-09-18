@@ -1,0 +1,617 @@
+﻿
+@charset 'UTF-8';
+
+/*********************************************************************************/
+/* Basic                                                                         */
+/*********************************************************************************/
+        html {
+                height: 100%;
+        }
+	body { 
+		margin: 0px;
+		padding: 0px;
+		background: #f3f2ed;
+		font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+		font-size: 1em;
+		font-weight: 300;
+		color: #8A8A8A;
+	}
+
+	h1, h2, h3 {
+		margin: 0px;
+		padding: 0px;
+		font-weight: 300;
+	}
+
+	p {
+		margin-bottom: 1.5em;
+		line-height: 180%;
+	}
+
+	a {
+		color: #D1551F;
+	}
+
+	strong {
+		font-weight: 700;
+		color: #2A2A2A;
+	}
+
+	/* Images */
+
+		.image
+		{
+			display: inline-block;
+		}
+		
+			.image img
+			{
+				display: block;
+				width: 100%;
+			}
+
+			.image.featured
+			{
+				display: block;
+				width: 100%;
+				margin: 0 0 2em 0;
+			}
+			
+			.image.full
+			{
+				display: block;
+				width: 100%;
+				margin: 0 0 2em 0;
+			}
+			
+			.image.left
+			{
+				float: left;
+				margin: 0 2em 2em 0;
+			}
+			
+			.image.centered
+			{
+				display: block;
+				margin: 0 0 2em 0;
+			}
+
+				.image.centered img
+				{
+					margin: 0 auto;
+					width: auto;
+				}
+
+
+	header
+	{
+		margin-bottom: 2.5em;
+	}
+
+	header h2
+	{
+		letter-spacing: -2px;
+		text-transform: uppercase;
+		font-weight: 900;
+		font-size: 2em;
+		color: #323338;
+	}
+
+	header .byline
+	{
+	}
+	
+	
+
+/** LIST STYLE 1 */
+
+ul.style1 {
+	margin: 0px;
+	padding: 0px 0px 0px 0px;
+	list-style: none;
+}
+
+ul.style1 li {
+	display: inline-block;
+	padding: 1em 0em;
+	border-top: 1px solid #E6E6E6;
+	line-height: 160%;
+}
+
+ul.style1 span
+{
+	margin-right: 0.75em;
+}
+
+ul.style1 a {
+	text-decoration: none;
+	color: #525252;
+}
+
+ul.style1 a:hover {
+	text-decoration: underline;
+}
+
+ul.style1 .first {
+	border-top: none;
+	padding-top: 0px;
+}
+
+/** LIST STYLE 3 */
+
+ul.style3 {
+	margin: 0px;
+	padding: 0px;
+	list-style: none;
+}
+
+ul.style3 li {
+	padding: 20px 0px 25px 0px;
+	border-top: 1px solid #E7E5DA;
+}
+
+ul.style3 a {
+	display: block;
+	text-decoration: none;
+	color: #525252;
+}
+
+ul.style3 a:hover {
+	text-decoration: underline;
+}
+
+ul.style3 .date {
+	display: inline-block;
+	margin: 0px 0px 20px 0px;
+	padding: 1em 1em;
+	background: #323338;
+	border-radius: 4px;
+	line-height: normal;
+	text-align: center;
+	text-transform: uppercase;
+	font-size: 14px;
+	color: #FFFFFF;
+}
+
+ul.style3 .date b {
+}
+
+ul.style3 .date a {
+	color: #FFFFFF;
+}
+
+ul.style3 .date a:hover {
+	text-decoration: none;
+}
+
+ul.style3 .first {
+	padding-top: 0px;
+	border-top: none;
+}
+
+.listhead {
+    margin:0;
+    padding: 0;
+    list-style-type: none;
+    display: table;
+    table-layout: fixed;
+    width:100%;
+}
+.listhead>li {
+    display: table-cell;
+    padding:5px;
+    text-align: center;
+}
+
+/** BUTTON STYLE */
+
+	/* Buttons */
+		
+		.button
+		{
+			//position: relative;
+			display: inline-block;
+			//margin-top: 2em;
+			//padding: 1em 1.5em;
+			background: #323338;
+			border-radius: 4px;
+			text-decoration: none;
+			text-transform: uppercase;
+			font-size: 1.1em;
+			color: #FFF;
+			-moz-transition: color 0.35s ease-in-out, background-color 0.35s ease-in-out;
+			-webkit-transition: color 0.35s ease-in-out, background-color 0.35s ease-in-out;
+			-o-transition: color 0.35s ease-in-out, background-color 0.35s ease-in-out;
+			-ms-transition: color 0.35s ease-in-out, background-color 0.35s ease-in-out;
+			transition: color 0.35s ease-in-out, background-color 0.35s ease-in-out;
+			cursor: pointer;
+		}
+
+			.button:hover
+			{
+				background: #1f2023;
+				color: #FFF !important;
+			}
+
+.button-style {
+	margin: 3px 0px 3px 0px;
+        padding: 0px 10px 0px 10px;
+	//background: #CEC3A0;
+        background: #EFD89C;
+        border-radius: 7px;
+        border: .1em solid #fafafa;
+        line-height: normal;
+        text-align: center;
+        cursor: pointer;
+        color: #333;
+        //font-family: Verdana;
+        //font-weight: bold;
+        -moz-transition: color 0.35s ease-in-out, background-color 0.35s ease-in-out;
+        -webkit-transition: color 0.35s ease-in-out, background-color 0.35s ease-in-out;
+        -o-transition: color 0.35s ease-in-out, background-color 0.35s ease-in-out;
+        -ms-transition: color 0.35s ease-in-out, background-color 0.35s ease-in-out;
+        transition: color 0.35s ease-in-out, background-color 0.35s ease-in-out;
+}
+			.button-style:hover
+			{
+				background: #DFC88C;
+				color: #FFF !important;
+			}
+.button-style2 {
+	margin: 3px 0px 3px 0px;
+        padding: 0px 10px 0px 10px;
+	background: #DFC88C;
+        border-radius: 7px;
+        border: .1em solid #fafafa;
+        line-height: normal;
+        text-align: center;
+        cursor: pointer;
+        -moz-transition: color 0.35s ease-in-out, background-color 0.35s ease-in-out;
+        -webkit-transition: color 0.35s ease-in-out, background-color 0.35s ease-in-out;
+        -o-transition: color 0.35s ease-in-out, background-color 0.35s ease-in-out;
+        -ms-transition: color 0.35s ease-in-out, background-color 0.35s ease-in-out;
+        transition: color 0.35s ease-in-out, background-color 0.35s ease-in-out;
+}
+			.button-style2:hover
+			{
+				background: #CFB87C;
+				color: #FFF !important;
+			}
+.button-style3 {
+	margin: 3px 0px 3px 0px;
+        padding: 0px 10px 0px 10px;
+	background: #CFB87C;
+        border-radius: 7px;
+        border: .1em solid #fafafa;
+        line-height: normal;
+        text-align: center;
+        cursor: pointer;
+        -moz-transition: color 0.35s ease-in-out, background-color 0.35s ease-in-out;
+        -webkit-transition: color 0.35s ease-in-out, background-color 0.35s ease-in-out;
+        -o-transition: color 0.35s ease-in-out, background-color 0.35s ease-in-out;
+        -ms-transition: color 0.35s ease-in-out, background-color 0.35s ease-in-out;
+        transition: color 0.35s ease-in-out, background-color 0.35s ease-in-out;
+}
+			.button-style3:hover
+			{
+				background: #BFA86C;
+				color: #FFF !important;
+			}                        
+.button-style a {
+	//text-transform: uppercase;
+	text-decoration: none;
+	text-shadow: 1px 1px 1px #8A8B71;
+	//font-size: 14px;
+	color: #454545;
+}
+
+/*********************************************************************************/
+/* Header                                                                        */
+/*********************************************************************************/
+
+	#header
+	{
+		position: relative;
+		text-align: center;
+		/*background: url(../images/banner3.jpg) no-repeat center;*/
+		background-color: #afafaf;
+		background-size: cover;
+		height:9em;
+	}
+
+
+	#page {
+		padding: 3.5em 0em;
+		background: #FFF
+	}
+	
+	#content header
+	{
+		margin-bottom: 2em !important;
+	}
+
+	#content header h2
+	{
+		line-height: 1.2em;
+		font-size: 3em;
+	}
+
+	#content
+	{
+	}
+	
+	#footer
+	{
+		padding: 5em 0em;
+	}
+
+
+/*********************************************************************************/
+/* Copyright                                                                     */
+/*********************************************************************************/
+	
+	#copyright
+	{
+		position: relative;
+		text-align: center;
+	}
+	
+	#copyright .container
+	{
+		padding: 3em 0em;
+		border-top: 1px solid;
+		border-color: rgba(0,0,0,.1);
+	}
+	
+	#copyright a
+	{
+		text-decoration: none;
+	}
+	
+	
+	#main
+	{
+		padding: 5em 0em;
+		background: #FFF
+	}	
+        #masternav *{
+            z-index: 200;
+        }
+        #masternav {
+            width:100%;
+            
+        }
+        
+        #masternav ul {
+            padding: 0;
+            margin: 0;
+            
+        }
+
+        #masternav li {
+            display: inline-block;
+            position: relative;
+            width:100%;
+        }
+
+
+        #masternav ul ul {
+            padding: 0em 0em;
+            position: absolute;
+            display: none;
+            width:inherit;
+            left:100%;
+            top: 0;
+        }
+
+
+        #masternav li:hover ul {
+            display: block;
+        }
+        
+        #masternav li:active ul {
+            display: block;
+        }
+
+
+        #masternav ul ul ul li {
+            left: 0;
+            top: 0em;
+            padding: 0em 0em;
+            position: relative;
+            display: none;
+        }
+
+
+        #masternav ul ul :hover > ul li{
+            display: block;
+        }
+        
+        #masternav ul ul :active > ul li{
+            display: block;
+        }
+        
+        #fullScreen
+        {
+            position:fixed;
+            padding:0;
+            margin:0;
+            display:none;
+            top:0%;
+            left:0%;
+            z-index:250;
+            width: 100%;            width: 100vw;
+            height: 100%;            height: 100vh;
+            background:rgba(0,0,0,0.8  );
+        }
+        #dimScreen
+        {
+            position:fixed;
+            padding:0;
+            margin:0;
+            display:none;
+            overflow: visible;
+            overflow-y:visible;
+            overflow-x:visible;
+            top:10%;top:10vh;
+            left:10%;left:10vw;
+            z-index:300;
+            width: 80%;width: 80vw;
+            height: 80%;height: 80vh;
+            background:rgba(0,0,0,0.8  );
+            border-radius: 2%;
+            border: 2px black solid;
+            -webkit-box-shadow: 0px 0px 5px rgba(10,20,20,.8);
+            -moz-box-shadow: 0px 0px 5px rgba(10,20,20,.8);
+            box-shadow: 0px 0px 5px rgba(10,20,20,.8);
+        }
+        
+div.imageparent {
+    margin: 0.5%;
+    cursor:pointer;
+    border: 1px solid #CEC3A0 ;
+    background-color: #E7E5DA;
+    border-radius: 7%;
+    height: 200px;
+    width: 23%;//min-width:vw;
+    max-width: 23%;
+    float: left;
+    text-align: center;
+    display: table;
+}
+div.imageparent:hover {
+    border:1px solid #ffffff;
+}
+div.imagechild{
+    display: table-cell;
+    vertical-align: middle;
+    width: 100%;
+    max-width: 100%;
+}
+div.imagechild img {
+    width: 95%;
+    max-width: 95%;
+    height:125px;
+    margin: 5px;
+    border: 1px solid #ffffff;
+}
+div.imagechild img:hover {
+    border:1px solid #CEC3A0;
+}
+
+.boxloading{
+    display: table;
+    width:100%;
+    height:100%;
+}
+.loading{
+    vertical-align: middle;
+    text-align: center;
+    display: table-cell;
+    height: 100%;
+}
+.loading1{
+    vertical-align: middle;
+    text-align: center;
+    display: table-cell;
+    height: 100%;
+}
+
+
+.demoview1 td,th{
+    padding: .2em;
+}
+.demoview1 td{
+    border:1px solid grey;color:#1f2023;
+}
+.demoview1 th{
+    background-color: #525252;color:white;
+}
+.demoview td,th{
+    padding: .2em;
+}
+.demoview td{
+    border:1px solid grey;color:#1f2023;
+}
+.demoview th{
+    background-color: #CFB87C;color:white;
+}
+
+#divtable {
+    display: table;
+    width: 100%;
+    max-width: 100%;
+    
+}
+
+#divheader {
+    display: table-header-group;
+    width: 100%;
+    max-width: 100%;
+}
+
+.divheaderCell {
+    display: table-cell;
+    font-weight: bold;
+    //border: red solid 1px;
+    width: 25%;
+    max-width: 25%;padding-bottom: 0.5em;padding-top: 1.5em;
+}
+
+.divheaderCell .button{
+    color:black;
+    font-size:1em;
+    padding:0.4em 0.3em;
+    text-transform: none;
+    border:1px grey solid;
+}
+
+.divheaderCell .button a{
+    color:Grey;
+}
+
+.divrow {
+    display: table-row;
+    width: 100%;
+    max-width: 100%;
+}
+
+.divcell {
+    display: table-cell;
+    //border: blue solid 1px;
+    width: 25%;
+    max-width: 25%;
+}
+
+div.imageparentnew {
+    margin: 0.5%;
+    cursor:pointer;
+    border: 1px solid #CEC3A0 ;
+    background-color: #E7E5DA;
+    border-radius: 7%;
+    height: 200px;
+    width: 95%;//min-width:vw;
+    max-width: 95%;
+    float: left;
+    text-align: center;
+    display: table;
+}
+div.imageparentnew:hover {
+    border:1px solid #ffffff;
+}
+div.imagechildnew{
+    display: table-cell;
+    vertical-align: middle;
+    width: 100%;
+    max-width: 100%;
+}
+div.imagechildnew img {
+    //width: 95%;
+    height:125px;
+    max-width: 95% !important;
+    margin: 5px;
+    border: 1px solid #ffffff;
+}
+div.imagechildnew img:hover {
+    border:1px solid #CEC3A0;
+}
