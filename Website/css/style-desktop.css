@@ -1,0 +1,205 @@
+/*
+	Synchronous by TEMPLATED
+	templated.co @templatedco
+	Released for free under the Creative Commons Attribution 3.0 license (templated.co/license)
+*/
+
+/*********************************************************************************/
+/* Header                                                                        */
+/*********************************************************************************/
+
+	#header
+	{
+		padding: 0em 0em;
+	}
+	
+		.homepage #header
+		{
+			padding:0em 0em;
+		}
+
+		#header .container
+		{
+		}
+
+/*********************************************************************************/
+/* Logo                                                                          */
+/*********************************************************************************/
+
+	#logo
+	{
+		margin-bottom: 0em;
+		
+	}
+	
+		#logo h1
+		{
+			color: #FFF;
+		}
+	
+		#logo h1 a
+		{
+			display: block;
+			letter-spacing: 1px;
+			text-decoration: none;
+			text-transform: uppercase;
+			font-size: 2em;
+			color: #333333;
+			text-shadow: .01em .01em #aaaaaa;
+		}
+
+		#logo span
+		{
+			display: block;
+			letter-spacing: 1px;
+			text-transform: uppercase;
+			font-size: 1.2em;
+			color: #8e8588;
+		}			
+			
+
+/*********************************************************************************/
+/* Nav                                                                           */
+/*********************************************************************************/
+	#nav
+	{
+		text-align:center;
+	}
+        
+        #nav a
+        {color:#ccc;text-decoration: none;}
+        #nav .active{
+            background: #333;
+        }
+        #nav ul {
+          //text-align: left;
+          padding: 0.3em 0.3em 0.3em 0.3em;
+          text-transform: uppercase;
+          margin: 0;
+          //border:1px solid #666;
+          //border-radius:20px;
+          list-style: none;
+            font-weight: normal;
+            font-size: 1em;
+            outline: 0;
+            color: #000000;
+          //-webkit-box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
+          //-moz-box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
+          //box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
+        }
+#nav ul li {
+  font: bold 12px/18px sans-serif;
+  display: inline-block;
+  //margin-right: -4px;
+  position: relative;
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 10px;
+  padding: 15px 20px;
+  background: #555;
+  cursor: pointer;
+  -webkit-transition: all 0.2s;
+  -moz-transition: all 0.2s;
+  -ms-transition: all 0.2s;
+  -o-transition: all 0.2s;
+  transition: all 0.2s;
+}
+#nav ul li:hover {
+  background: #444;
+  color: #fff;
+}
+#nav ul li ul {
+  padding: 0;
+  position: absolute;
+  top: 7.6em;
+  left: 0;
+  width: 150px;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+  display: none;
+  opacity: 0;
+  visibility: hidden;
+  -webkit-transiton: opacity 0.2s;
+  -moz-transition: opacity 0.2s;
+  -ms-transition: opacity 0.2s;
+  -o-transition: opacity 0.2s;
+  -transition: opacity 0.2s;
+}
+#nav ul li ul li { 
+  background: #555; 
+  display: block; 
+  color: #fff;
+  text-shadow: 0 -1px 0 #000;
+}
+#nav ul li ul li:hover { background: #666; }
+#nav ul li:hover ul {
+  display: block;
+  opacity: 1;
+  visibility: visible;
+}
+
+/*********************************************************************************/
+/* Banner                                                                        */
+/*********************************************************************************/
+
+	#banner {
+		overflow: hidden;
+		margin-top: 10px;
+		margin-bottom: 30px;
+		box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, .3);
+	}
+
+	#banner .banner-border {
+		padding: 20px;
+		background: #FFFFFF;
+	}
+
+	#banner a img {
+		display: block;
+		width: 100%;
+	}
+
+/*********************************************************************************/
+/* Page Wrapper                                                                  */
+/*********************************************************************************/
+
+	.homepage #page {
+		overflow: hidden;
+	}
+
+/*********************************************************************************/
+/* Content                                                                       */
+/*********************************************************************************/
+
+	#content {
+		padding: 0px 0px 0px 0px;
+                
+	}
+
+	.twocolumn2 #content {
+	}
+
+	.onecolumn #content {
+	}
+
+	#content h2 {
+	}
+
+/*********************************************************************************/
+/* Sidebar    r                                                                  */
+/*********************************************************************************/
+
+	#sidebar1 {
+		padding: 0px 0px 0px 0px;
+	}
+
+	#sidebar1 h2 {
+	}
+
+	#sidebar2 {
+		padding: 0px 0px 0px 0px;
+                width: 12em;
+	}
+
+	#sidebar2 h2 {
+	}
