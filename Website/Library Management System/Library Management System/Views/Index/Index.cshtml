@@ -1,0 +1,31 @@
+﻿@model IEnumerable<Library_Management_System.Models.IndexModel>
+@{
+    ViewBag.Title = "Login";
+}
+
+<h2>Login</h2>
+<div>
+    <form method="post" action="/login-check">
+        <div>
+            <div>
+                UserName:
+            </div>
+            <div>
+                <input type="text" name="username" id="username" />
+            </div>
+        </div>
+        <div>
+            <div>
+                Password:
+            </div>
+            <div>
+                <input type="password" name="password" id="password" />
+            </div>
+        </div>
+        <div>
+            <div>
+                <input type="submit" value="Login"/>
+            </div>
+        </div>
+    </form>
+</div>
