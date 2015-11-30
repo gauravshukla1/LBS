@@ -1,0 +1,16 @@
+----------------------------
+Visual Studio Community 2015 
+----------------------------
+-- download link -- https://go.microsoft.com/fwlink/?LinkId=691978&clcid=0x409
+
+---------------------------------
+MS SQL Server Express 2014 64 bit
+---------------------------------
+-- download link -- https://www.microsoft.com/en-us/download/details.aspx?id=42299
+uname- LMS
+password - LMS123
+
+---------------------
+SQL Server Data Tools
+---------------------
+-- download link -- http://go.microsoft.com/fwlink/?LinkID=619229&clcid=0x409
