@@ -1,0 +1,31 @@
+﻿@model Website.Models.LibraryUser
+@{
+    ViewBag.Title = "LogIn";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@ViewBag.Message
+
+<!--<h2>LogIn</h2>-->
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary(true, "Login Failed. Check your credentials")
+    <div>
+        <fieldset>
+            <legend>Login Form</legend>
+            <div>@Html.LabelFor(u => u.emailId)</div>
+
+            <div>@Html.TextBoxFor(u => u.emailId)
+            @Html.ValidationMessageFor(u => u.emailId)
+            </div>
+
+            <div>@Html.LabelFor(u => u.password)</div>
+
+            <div>
+                @Html.PasswordFor(u => u.password)
+            @Html.ValidationMessageFor(u => u.password)
+        </div>
+            <input type="submit" value="LogIn"/>
+        </fieldset>
+    </div>
+}
+
