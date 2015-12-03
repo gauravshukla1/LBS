@@ -108,7 +108,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Controllers\AdminstratorController.cs" />
+    <Compile Include="Controllers\AdministratorController.cs" />
     <Compile Include="Controllers\LibrarianController.cs" />
     <Compile Include="Controllers\StudentController.cs" />
     <Compile Include="Controllers\UserController.cs" />
@@ -131,6 +131,9 @@
     <Content Include="Views\User\LogIn.cshtml" />
     <Content Include="Views\User\Registration.cshtml" />
     <Content Include="Views\User\LogOut.cshtml" />
+    <Content Include="Views\Student\Index.cshtml" />
+    <Content Include="Views\Librarian\Index.cshtml" />
+    <Content Include="Views\Administrator\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -139,9 +142,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Views\Adminstrator\" />
     <Folder Include="Views\Library\" />
-    <Folder Include="Views\Student\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
