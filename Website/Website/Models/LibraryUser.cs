@@ -8,6 +8,8 @@ namespace Website.Models
 {
     public class LibraryUser
     {
+        public String emailId { get; set; }
+        public String password { get; set; }
         
         public String Authenticate(String emailId,String password)
         {
