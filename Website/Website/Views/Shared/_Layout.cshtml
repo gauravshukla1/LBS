@@ -26,6 +26,19 @@
         </div>
     </div>
 
+    <div style="width:auto;background-color:#728EA7;">
+        @if(Request.IsAuthenticated)
+        {
+            <strong>@Html.Encode(User.Identity.Name)</strong>
+            @Html.ActionLink("Log Out","LogOut","User")
+        }
+        else
+        {
+            @Html.ActionLink("Register","Registration","User")
+            <span> </span>
+            @Html.ActionLink("Log In","LogIn","User")
+        }
+    </div>
     <div class="container body-content">
         @RenderBody()
         <hr />
