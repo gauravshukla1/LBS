@@ -12,33 +12,33 @@
     @Html.ValidationSummary(true, "Login Failed. Check your credentials")
     <div>
         <fieldset>
-            <legend>Login Form</legend>
-            <div>@Html.LabelFor(u => u.emailId)</div>
+            <legend>Registration Form</legend>
+            <div>@Html.LabelFor(u => u.EmailID)</div>
 
             <div>
-                @Html.TextBoxFor(u => u.emailId)
-            @Html.ValidationMessageFor(u => u.emailId)
+                @Html.TextBoxFor(u => u.EmailID)
+            @Html.ValidationMessageFor(u => u.EmailID)
         </div>
 
-        <div>@Html.LabelFor(u => u.password)</div>
+        <div>@Html.LabelFor(u => u.Password)</div>
 
         <div>
-            @Html.PasswordFor(u => u.password)
-            @Html.ValidationMessageFor(u => u.password)
+            @Html.PasswordFor(u => u.Password)
+            @Html.ValidationMessageFor(u => u.Password)
         </div>
 
-            <div>@Html.LabelFor(u => u.firstname)</div>
+            <div>@Html.LabelFor(u => u.FirstName)</div>
 
             <div>
-                @Html.TextBoxFor(u => u.firstname)
-                @Html.ValidationMessageFor(u => u.firstname)
+                @Html.TextBoxFor(u => u.FirstName)
+                @Html.ValidationMessageFor(u => u.FirstName)
             </div>
 
-            <div>@Html.LabelFor(u => u.lastname)</div>
+            <div>@Html.LabelFor(u => u.LastName)</div>
 
             <div>
-                @Html.TextBoxFor(u => u.lastname)
-                @Html.ValidationMessageFor(u => u.lastname)
+                @Html.TextBoxFor(u => u.LastName)
+                @Html.ValidationMessageFor(u => u.LastName)
             </div>
         <input type="submit" value="Register" />
     </fieldset>

@@ -2039,8 +2039,8 @@ intellisense.annotate(jQuery.fn, {
     ///   <returns type="jQuery" />
     /// </signature>
   },
-  'password': function() {
-    /// <summary>Selects all elements of type password.</summary>
+  'Password': function() {
+    /// <summary>Selects all elements of type Password.</summary>
   },
   'position': function() {
     /// <summary>Get the current coordinates of the first element in the set of matched elements, relative to the offset parent.</summary>
