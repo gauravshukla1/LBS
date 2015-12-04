@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
@@ -55,7 +56,7 @@ namespace Website.Controllers
         
         public ActionResult LogOut()
         {
-
+            Session.Clear();
             return View();
         }
 
@@ -88,7 +89,8 @@ namespace Website.Controllers
             {
                 if (EmailID != null && Password != null && FirstName != null && LastName != null)
                 {
-                    conn = new SqlConnection(@"Data Source = (LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\LMS_DB.mdf;Integrated Security = True");
+                    string connStr = ConfigurationManager.ConnectionStrings["_connectionstring"].ConnectionString;
+                    conn = new SqlConnection(connStr);
                     conn.Open();
                     SqlCommand cmd = new SqlCommand("dbo.User_AddStudent", conn);
                     cmd.CommandType = CommandType.StoredProcedure;
