@@ -1,0 +1,27 @@
+﻿@model List<List<string>>
+@{
+    ViewBag.Title = "Search";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@ViewBag.Message
+<h2>Search Result</h2>
+
+<table>
+    <tr>
+        <th>ISBN</th>
+        <th>Title</th>
+        <th>Author</th>
+        <th>Category</th>
+        <th>Qty Available</th>
+    </tr>
+    @foreach(List<string> tmp in ViewBag.Results)
+    {
+        <tr>
+            <td>@tmp.ElementAt(0)</td>
+            <td>@tmp.ElementAt(1)</td>
+            <td>@tmp.ElementAt(2)</td>
+            <td>@tmp.ElementAt(3)</td>
+            <td>@tmp.ElementAt(4)</td>
+        </tr>
+    }
+</table>
