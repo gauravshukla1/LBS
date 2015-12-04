@@ -36,13 +36,13 @@ namespace Website.Controllers
         [HttpPost]
         public ActionResult LogIn(Models.LibraryUser user)
         {
-            if(IsValid(user.emailId,user.password))                            
+            if(IsValid(user.EmailID,user.Password))                            
             {
-                FormsAuthentication.SetAuthCookie(user.emailId, false);
+                FormsAuthentication.SetAuthCookie(user.EmailID, false);
                 /*ViewBag.Message = login_type;
                 return View();*/
                 Session["login_type"] = login_type;
-                Session["emailId"] = user.emailId;
+                Session["EmailID"] = user.EmailID;
                 return RedirectToAction("Index");
             }
             else
@@ -69,7 +69,7 @@ namespace Website.Controllers
         [HttpPost]
         public ActionResult Registration(Models.LibraryUser user)
         {
-            if (StoreUser(user.emailId, user.password,user.firstname,user.lastname))
+            if (StoreUser(user.EmailID, user.Password,user.FirstName,user.LastName))
             {
                 return RedirectToAction("Index","User");
             }
@@ -79,14 +79,14 @@ namespace Website.Controllers
             }
             return View();
         }
-        private bool StoreUser(String emailId, String password, String firstname, String lastname)
+        private bool StoreUser(String EmailID, String Password, String FirstName, String LastName)
         {
             SqlConnection conn = null;
             SqlDataReader rdr = null;
 
             try
             {
-                if (emailId != null && password != null && firstname != null && lastname != null)
+                if (EmailID != null && Password != null && FirstName != null && LastName != null)
                 {
                     conn = new SqlConnection(@"Data Source = (LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\LMS_DB.mdf;Integrated Security = True");
                     conn.Open();
@@ -98,37 +98,37 @@ namespace Website.Controllers
                     parameter1.ParameterName = "@email_id";
                     parameter1.SqlDbType = SqlDbType.NVarChar;
                     parameter1.Direction = ParameterDirection.Input;
-                    parameter1.Value = emailId;
+                    parameter1.Value = EmailID;
 
                     // Add the parameter to the Parameters collection. 
                     cmd.Parameters.Add(parameter1);
 
                     // Add the input parameter and set its properties.
                     SqlParameter parameter2 = new SqlParameter();
-                    parameter2.ParameterName = "@password";
+                    parameter2.ParameterName = "@Password";
                     parameter2.SqlDbType = SqlDbType.NVarChar;
                     parameter2.Direction = ParameterDirection.Input;
-                    parameter2.Value = password;
+                    parameter2.Value = Password;
 
                     // Add the parameter to the Parameters collection. 
                     cmd.Parameters.Add(parameter2);
 
                     // Add the input parameter and set its properties.
                     SqlParameter parameter3 = new SqlParameter();
-                    parameter3.ParameterName = "@firstname";
+                    parameter3.ParameterName = "@FirstName";
                     parameter3.SqlDbType = SqlDbType.NVarChar;
                     parameter3.Direction = ParameterDirection.Input;
-                    parameter3.Value = firstname;
+                    parameter3.Value = FirstName;
 
                     // Add the parameter to the Parameters collection. 
                     cmd.Parameters.Add(parameter3);
 
                     // Add the input parameter and set its properties.
                     SqlParameter parameter4 = new SqlParameter();
-                    parameter4.ParameterName = "@lastname";
+                    parameter4.ParameterName = "@LastName";
                     parameter4.SqlDbType = SqlDbType.NVarChar;
                     parameter4.Direction = ParameterDirection.Input;
-                    parameter4.Value = lastname;
+                    parameter4.Value = LastName;
 
                     // Add the parameter to the Parameters collection. 
                     cmd.Parameters.Add(parameter4);
@@ -156,7 +156,7 @@ namespace Website.Controllers
   
             
         }
-        private bool IsValid(String emailId, String password)
+        private bool IsValid(String EmailID, String Password)
         {
             //return true;
             SqlConnection conn = null;
@@ -174,17 +174,17 @@ namespace Website.Controllers
                 parameter1.ParameterName = "@email_id";
                 parameter1.SqlDbType = SqlDbType.NVarChar;
                 parameter1.Direction = ParameterDirection.Input;
-                parameter1.Value = emailId;
+                parameter1.Value = EmailID;
 
                 // Add the parameter to the Parameters collection. 
                 cmd.Parameters.Add(parameter1);
 
                 // Add the input parameter and set its properties.
                 SqlParameter parameter = new SqlParameter();
-                parameter.ParameterName = "@password";
+                parameter.ParameterName = "@Password";
                 parameter.SqlDbType = SqlDbType.NVarChar;
                 parameter.Direction = ParameterDirection.Input;
-                parameter.Value = password;
+                parameter.Value = Password;
 
                 // Add the parameter to the Parameters collection. 
                 cmd.Parameters.Add(parameter);
