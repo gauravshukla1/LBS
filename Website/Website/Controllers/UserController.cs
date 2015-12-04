@@ -16,12 +16,12 @@ namespace Website.Controllers
         // GET: User
         public ActionResult Index()
         {
-            login_type = Convert.ToString(Session["login_type"]);
+            login_type = Convert.ToString(Session["login_type"]).Trim();
 
             if (login_type != null) {
-                if (login_type == "Student") { return RedirectToRoute("Student"); }
-                if (login_type == "Librarian") { return RedirectToRoute("Librarian"); }
-                if (login_type == "Administrator") { return RedirectToRoute("Administrator"); }
+                if (login_type == "Student") { return RedirectToAction("Index","Student"); }
+                if (login_type == "Librarian") { return RedirectToAction("Index", "Librarian"); }
+                if (login_type == "Admin") { return RedirectToAction("Index", "Administrator"); }
             }
             return View();
             
