@@ -19,6 +19,19 @@
                 </button>
                 @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
+            <div style="width:auto;background-color:#000000;">
+                @if (Request.IsAuthenticated)
+                {
+                    <strong>@Html.Encode(User.Identity.Name)</strong>
+                    @Html.ActionLink("Log Out", "LogOut", "User")
+                }
+                else
+                {
+                    @Html.ActionLink("Register", "Registration", "User")
+                    <span> </span>
+                    @Html.ActionLink("Log In", "LogIn", "User")
+                }
+            </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                 </ul>
