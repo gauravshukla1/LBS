@@ -10,7 +10,9 @@ namespace Website.Models
     {
         public String emailId { get; set; }
         public String password { get; set; }
-        
+        public string firstname { get; set; }
+        public string lastname { get; set; }
+
         public String Authenticate(String emailId,String password)
         {
             String userType = "";
