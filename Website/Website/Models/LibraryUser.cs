@@ -8,29 +8,30 @@ namespace Website.Models
 {
     public class LibraryUser
     {
-        public String emailId { get; set; }
-        public String password { get; set; }
-        public string firstname { get; set; }
-        public string lastname { get; set; }
+        public string EmailID { get; set; }
+        public string Password { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string login_type { get; set; }
 
-        public String Authenticate(String emailId,String password)
+        public String Authenticate(String EmailID,String Password)
         {
             String userType = "";
 
             return userType;
         }
 
-        public void AddStudent(String emailId, String password)
+        public void AddStudent(String EmailID, String Password)
         {
             int count = 0;
-            bool ValidEmailID = IsValid(emailId);
+            bool ValidEmailID = IsValid(EmailID);
             if (ValidEmailID)
             {
-                foreach (char c in emailId)
+                foreach (char c in EmailID)
                 {
                     if (c.Equals('@'))
                     {
-                        if (emailId.Substring(count + 1).Equals("colorado.edu"))
+                        if (EmailID.Substring(count + 1).Equals("colorado.edu"))
                         {  //Accept Email
                             AcceptEmail();
                             break;
@@ -49,7 +50,7 @@ namespace Website.Models
         private void AcceptEmail()
         {
             MailMessage message = new MailMessage();
-            message.To.Add(emailId);
+            message.To.Add(EmailID);
             message.Subject = "Acoount created";
             message.From = new MailAddress("nine8439@colorado.edu");
             message.Body = "Congratulations you have sucessfully registered";
@@ -57,11 +58,11 @@ namespace Website.Models
             smtp.Send(message);
         }
 
-        public bool IsValid(string emailId)
+        public bool IsValid(string EmailID)
         {
             try
             {
-                MailAddress m = new MailAddress(emailId);
+                MailAddress m = new MailAddress(EmailID);
 
                 return true;
             }
