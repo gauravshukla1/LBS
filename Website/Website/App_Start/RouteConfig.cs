@@ -26,7 +26,7 @@ namespace Website
             );
 
             routes.MapRoute(
-                name: "Adminstrator",
+                name: "Administrator",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Adminstrator", action = "Index", id = UrlParameter.Optional }
             );
