@@ -132,9 +132,9 @@
     <Content Include="Views\User\LogIn.cshtml" />
     <Content Include="Views\User\Registration.cshtml" />
     <Content Include="Views\User\LogOut.cshtml" />
-    <Content Include="Views\Student\Index.cshtml" />
     <Content Include="Views\Librarian\Index.cshtml" />
     <Content Include="Views\Administrator\Index.cshtml" />
+    <Content Include="Views\Student\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
