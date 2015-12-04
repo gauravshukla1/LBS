@@ -17,7 +17,6 @@ namespace Website.Controllers
         public ActionResult Index()
         {
             login_type = Convert.ToString(Session["login_type"]).Trim();
-
             if (login_type != null) {
                 if (login_type == "Student") { return RedirectToAction("Index","Student"); }
                 if (login_type == "Librarian") { return RedirectToAction("Index", "Librarian"); }
@@ -43,6 +42,7 @@ namespace Website.Controllers
                 /*ViewBag.Message = login_type;
                 return View();*/
                 Session["login_type"] = login_type;
+                Session["emailId"] = user.emailId;
                 return RedirectToAction("Index");
             }
             else
@@ -120,14 +120,7 @@ namespace Website.Controllers
 
                 cmd.ExecuteNonQuery();
                 login_type = Convert.ToString(cmd.Parameters["@login_type"].Value);
-                //login_type = login_type;
-                /*while (rdr.Read())
-                {
-                    Console.WriteLine(
-                        "Product: {0,-25} Price: ${1,6:####.00}",
-                        rdr["TenMostExpensiveProducts"],
-                        rdr["UnitPrice"]);
-                }*/
+                
             }
             finally
             {

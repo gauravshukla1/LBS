@@ -13,5 +13,24 @@ namespace Website.Controllers
         {
             return View();
         }
+
+        [HttpGet]
+        public ActionResult Search()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Search(Models.LibraryStudent student)
+        {
+
+            return View();
+        }
+
+        public ActionResult CheckedOutBook()
+        {
+            return View();
+        }
+
     }
 }
