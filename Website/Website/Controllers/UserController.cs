@@ -63,17 +63,99 @@ namespace Website.Controllers
         [HttpGet]
         public ActionResult Registration()
         {
-
             return View();
         }
 
         [HttpPost]
         public ActionResult Registration(Models.LibraryUser user)
         {
-            
+            if (StoreUser(user.emailId, user.password,user.firstname,user.lastname))
+            {
+                return RedirectToAction("Index","User");
+            }
+            else
+            {
+                ModelState.AddModelError("", "Registration Data is Incorrect");
+            }
             return View();
         }
+        private bool StoreUser(String emailId, String password, String firstname, String lastname)
+        {
+            SqlConnection conn = null;
+            SqlDataReader rdr = null;
 
+            try
+            {
+                if (emailId != null && password != null && firstname != null && lastname != null)
+                {
+                    conn = new SqlConnection(@"Data Source = (LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\LMS_DB.mdf;Integrated Security = True");
+                    conn.Open();
+                    SqlCommand cmd = new SqlCommand("dbo.User_AddStudent", conn);
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    // Add the input parameter and set its properties.
+                    SqlParameter parameter1 = new SqlParameter();
+                    parameter1.ParameterName = "@email_id";
+                    parameter1.SqlDbType = SqlDbType.NVarChar;
+                    parameter1.Direction = ParameterDirection.Input;
+                    parameter1.Value = emailId;
+
+                    // Add the parameter to the Parameters collection. 
+                    cmd.Parameters.Add(parameter1);
+
+                    // Add the input parameter and set its properties.
+                    SqlParameter parameter2 = new SqlParameter();
+                    parameter2.ParameterName = "@password";
+                    parameter2.SqlDbType = SqlDbType.NVarChar;
+                    parameter2.Direction = ParameterDirection.Input;
+                    parameter2.Value = password;
+
+                    // Add the parameter to the Parameters collection. 
+                    cmd.Parameters.Add(parameter2);
+
+                    // Add the input parameter and set its properties.
+                    SqlParameter parameter3 = new SqlParameter();
+                    parameter3.ParameterName = "@firstname";
+                    parameter3.SqlDbType = SqlDbType.NVarChar;
+                    parameter3.Direction = ParameterDirection.Input;
+                    parameter3.Value = firstname;
+
+                    // Add the parameter to the Parameters collection. 
+                    cmd.Parameters.Add(parameter3);
+
+                    // Add the input parameter and set its properties.
+                    SqlParameter parameter4 = new SqlParameter();
+                    parameter4.ParameterName = "@lastname";
+                    parameter4.SqlDbType = SqlDbType.NVarChar;
+                    parameter4.Direction = ParameterDirection.Input;
+                    parameter4.Value = lastname;
+
+                    // Add the parameter to the Parameters collection. 
+                    cmd.Parameters.Add(parameter4);
+
+                    cmd.ExecuteNonQuery();
+
+                    return true;
+                }
+                else
+                    return false;
+            }
+            finally
+            {
+                if (conn != null)
+                {
+                    conn.Close();
+                }
+                if (rdr != null)
+                {
+                    rdr.Close();
+                }
+            }
+
+            
+  
+            
+        }
         private bool IsValid(String emailId, String password)
         {
             //return true;
