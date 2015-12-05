@@ -7,42 +7,43 @@
 @ViewBag.Message
 
 <!--<h2>LogIn</h2>-->
-@using (Html.BeginForm())
-{
-    @Html.ValidationSummary(true, "Registration Failed. Check your credentials")
-    <div>
-        <fieldset>
-            <legend>Registration Form</legend>
-            <div>@Html.LabelFor(u => u.EmailID)</div>
-
-            <div>
-                @Html.TextBoxFor(u => u.EmailID)
-            @Html.ValidationMessageFor(u => u.EmailID)
+<div class="form-horizontal">
+    <h2 style="text-transform:uppercase">Registration Form</h2>
+    <hr />
+    @using (Html.BeginForm())
+    {
+        @Html.ValidationSummary(true, "Registration Failed. Check your credentials")
+        <div class="form-group">
+            <div class="col-md-10">
+                @Html.LabelFor(u => u.EmailID)
+                @Html.TextBoxFor(u => u.EmailID, new { @class = "form-control" })
+                @Html.ValidationMessageFor(u => u.EmailID)
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-10">
+                @Html.LabelFor(u => u.Password)
+                @Html.PasswordFor(u => u.Password, new { @class = "form-control" })
+                @Html.ValidationMessageFor(u => u.Password)
+            </div>
         </div>
 
-        <div>@Html.LabelFor(u => u.Password)</div>
-
-        <div>
-            @Html.PasswordFor(u => u.Password)
-            @Html.ValidationMessageFor(u => u.Password)
-        </div>
-
-            <div>@Html.LabelFor(u => u.FirstName)</div>
-
-            <div>
-                @Html.TextBoxFor(u => u.FirstName)
+        <div class="form-group">
+            <div class="col-md-10">
+                @Html.LabelFor(u => u.FirstName)
+                @Html.TextBoxFor(u => u.FirstName, new { @class = "form-control" })
                 @Html.ValidationMessageFor(u => u.FirstName)
             </div>
-
-            <div>@Html.LabelFor(u => u.LastName)</div>
-
-            <div>
-                @Html.TextBoxFor(u => u.LastName)
+        </div>
+        <div class="form-group">
+            <div class="col-md-10">
+                @Html.LabelFor(u => u.LastName)
+                @Html.TextBoxFor(u => u.LastName, new { @class = "form-control" })
                 @Html.ValidationMessageFor(u => u.LastName)
             </div>
-        <input type="submit" value="Register" />
-    </fieldset>
-</div>
-}
+        </div>
+      <input type="submit" value="Register" class="btn btn-default" />
+                    }
 
 
+                </div>
