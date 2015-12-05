@@ -25,5 +25,19 @@ namespace Website.Controllers
         {
             return ViewIfAdminLoggedIn();
         }
+
+        [HttpGet]
+        public ActionResult AddBook()
+        {
+            return ViewIfAdminLoggedIn();
+        }
+
+        [HttpPost]
+        public ActionResult AddBook(Models.LibraryAdministrator admin)
+        {
+            string msg = admin.AddBook();
+            ViewBag.Message = msg;
+            return ViewIfAdminLoggedIn();
+        }
     }
 }

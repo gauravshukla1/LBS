@@ -1,0 +1,73 @@
+﻿@model Website.Models.LibraryAdministrator
+@{
+    ViewBag.Title = "AddBook";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>AddBook</h2>
+@ViewBag.Message
+<div class="form-horizontal">
+    <h2 style="text-transform:uppercase">Add Book</h2>
+    <hr />
+    @using (Html.BeginForm())
+    {
+        @Html.ValidationSummary(true, "Add Book Failed. Please try again..!!")
+        <div class="form-group">
+            <div class="col-md-10">
+                @Html.LabelFor(u => u.ISBN)
+                @Html.TextBoxFor(u => u.ISBN, new { @class = "form-control" })
+                @Html.ValidationMessageFor(u => u.ISBN)
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-10">
+                @Html.LabelFor(u => u.Title)
+                @Html.TextBoxFor(u => u.Title, new { @class = "form-control" })
+                @Html.ValidationMessageFor(u => u.Title)
+            </div>
+        </div>
+            <div class="form-group">
+                <div class="col-md-10">
+                    @Html.LabelFor(u => u.Category)
+                    @Html.TextBoxFor(u => u.Category, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(u => u.Category)
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-10">
+                    @Html.LabelFor(u => u.Author)
+                    @Html.TextBoxFor(u => u.Author, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(u => u.Author)
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-10">
+                    @Html.LabelFor(u => u.Publisher)
+                    @Html.TextBoxFor(u => u.Publisher, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(u => u.Publisher)
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-10">
+                    @Html.LabelFor(u => u.Year_Published)
+                    @Html.TextBoxFor(u => u.Year_Published, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(u => u.Year_Published)
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-10">
+                    @Html.LabelFor(u => u.Quantity)
+                    @Html.TextBoxFor(u => u.Quantity, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(u => u.Quantity)
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-10">
+                    @Html.LabelFor(u => u.Location)
+                    @Html.TextBoxFor(u => u.Location, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(u => u.Location)
+                </div>
+            </div>
+            <input type="submit" value="AddBook" class="btn btn-default" />
+    }
+</div>
