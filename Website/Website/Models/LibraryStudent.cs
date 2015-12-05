@@ -14,6 +14,7 @@ namespace Website.Models
         private string _Author;
         private string _ISBN;
         private string _Query;
+        private string _EmailID;
 
         public string Title
         {
@@ -37,6 +38,12 @@ namespace Website.Models
         {
             get { return _Query; }
             set { this._Query = value; }
+        }
+
+        public string EmailID
+        {
+            get { return _EmailID; }
+            set { this._EmailID = value; }
         }
 
         public List<List<String>> Search(string term, string category)
@@ -154,6 +161,12 @@ namespace Website.Models
                 array_list.Add(temp);
             }
             return array_list;
+        }
+
+        public string CheckOut(string ISBN,string emaildId)
+        {
+            string msg;
+            
         }
     }
 }
