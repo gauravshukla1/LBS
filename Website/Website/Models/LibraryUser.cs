@@ -132,7 +132,7 @@ namespace Website.Models
 
                 cmd.ExecuteNonQuery();
                 login_type = Convert.ToString(cmd.Parameters["@login_type"].Value);
-
+                
             }
             catch (Exception)
             {
