@@ -15,7 +15,7 @@ namespace Website.Controllers
     {
         public ActionResult ViewIfNoOneLoggedIn()
         {
-            string login_type = Convert.ToString(Session["login_type"]).Trim();
+            string login_type = Convert.ToString(Session["login_type"]);
             if (login_type != null)
             {
                 if (login_type == "Student") { return RedirectToAction("Index", "Student"); }
@@ -47,7 +47,7 @@ namespace Website.Controllers
                 /*ViewBag.Message = login_type;
                 return View();*/
                 Session["login_type"] = user.login_type;
-                Session["EmailID"] = user.EmailID;
+                Session["EmailID"] = user.EmailID.Trim();
                 return RedirectToAction("Index");
             }
             else
@@ -74,7 +74,7 @@ namespace Website.Controllers
         [HttpPost]
         public ActionResult Registration(Models.LibraryUser user)
         {
-            if (user.StoreUser(user.EmailID, user.Password,user.FirstName,user.LastName))
+            if (user.AddUser(user.EmailID, user.Password,user.FirstName,user.LastName))
             {
                 return RedirectToAction("Index","User");
             }

@@ -10,66 +10,71 @@ namespace Website.Models
 {
     public class LibraryUser
     {
-        private string _EmailID;
-        private string _Password;
-        private string _FirstName;
-        private string _LastName;
-        public string _login_type;
+        protected string _EmailID;
+        protected string _Password;
+        protected string _FirstName;
+        protected string _LastName;
+        protected string _login_type;
+        protected string Books_Allowed;
+        protected string Books_Borrowed;
 
         public string EmailID
         {
             get { return _EmailID; }
-            set { this._EmailID = value; } 
+            set { _EmailID = value; }
         }
 
         public string Password
         {
             get { return _Password; }
-            set { this._Password = value; }
+            set { _Password = value; }
         }
 
         public string FirstName
         {
             get { return _FirstName; }
-            set { this._FirstName = value; }
+            set { _FirstName = value; }
         }
 
         public string LastName
         {
             get { return _LastName; }
-            set { this._LastName = value; }
+            set { _LastName = value; }
         }
 
         public string login_type
         {
             get { return _login_type; }
-            set { this._login_type = value; }
+            set { _login_type = value; }
         }
 
-        public void AddStudent(String EmailID, String Password)
+        public LibraryUser()
         {
-            int count = 0;
-            bool ValidEmailID = IsValid(EmailID);
-            if (ValidEmailID)
+        }
+
+        public LibraryUser(String emailid)
+        {
+            SqlConnection con;
+            DataTable table = new DataTable();
+            con = new SqlConnection(@"Data Source = (LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\LMS_DB.mdf;Integrated Security = True");
+            using (var cmd = new SqlCommand("User_GetUser", con))
+            using (var da = new SqlDataAdapter(cmd))
             {
-                foreach (char c in EmailID)
-                {
-                    if (c.Equals('@'))
-                    {
-                        if (EmailID.Substring(count + 1).Equals("colorado.edu"))
-                        {  //Accept Email
-                            AcceptEmail();
-                            break;
-                        }
-                        else
-                            //Reject email does not make sense
-                            break;
-                    }
-                    count++;
-                }
-                        
+                cmd.Parameters.Add("@email_id", SqlDbType.NVarChar).Value = emailid;
+                cmd.CommandType = CommandType.StoredProcedure;
+                da.Fill(table);
             }
 
+            foreach (DataRow row in table.Rows)
+            {
+                this.FirstName=(row["FirstName"].ToString());
+                this.LastName = (row["LastName"].ToString());
+                this.EmailID = (row["Email_ID"].ToString());
+                this.Password = (row["Password"].ToString());
+                this.login_type = (row["Login_Type"].ToString());
+                this.Books_Allowed = (row["Books_Allowed"].ToString());
+                this.Books_Borrowed = (row["Books_Borrowed"].ToString());
+            }
         }
 
         private void AcceptEmail()
@@ -79,8 +84,8 @@ namespace Website.Models
             message.Subject = "Acoount created";
             message.From = new MailAddress("nine8439@colorado.edu");
             message.Body = "Congratulations you have sucessfully registered";
-            System.Net.Mail.SmtpClient smtp = new System.Net.Mail.SmtpClient("yoursmtphost");
-            smtp.Send(message);
+            System.Net.Mail.SmtpClient smtp = new System.Net.Mail.SmtpClient("SetThisLater");
+            //smtp.Send(message);
         }
 
         public bool IsValid(string EmailID)
@@ -88,13 +93,17 @@ namespace Website.Models
             try
             {
                 MailAddress m = new MailAddress(EmailID);
-
-                return true;
+                if (EmailID.Contains("@colorado.edu"))
+                {
+                    AcceptEmail();
+                    return true;
+                }
             }
             catch (FormatException)
             {
                 return false;
             }
+            return false;
         }
 
         public bool Authenticate(String EmailID, String Password)
@@ -125,7 +134,7 @@ namespace Website.Models
                 cmd.Parameters.Add(outparameter);
 
                 cmd.ExecuteNonQuery();
-                login_type = Convert.ToString(cmd.Parameters["@login_type"].Value);
+                login_type = Convert.ToString(cmd.Parameters["@login_type"].Value).Trim();
                 
             }
             catch (Exception)
@@ -143,14 +152,16 @@ namespace Website.Models
                     rdr.Close();
                 }
             }
-            if (login_type.Trim() == "Student" || login_type.Trim() == "Librarian" || login_type.Trim() == "Admin")
+            if (login_type == "Student" || login_type == "Librarian" || login_type == "Admin")
                 return true;
             else
                 return false;
         }
 
-        public bool StoreUser(String EmailID, String Password, String FirstName, String LastName)
+        public bool AddUser(String EmailID, String Password, String FirstName, String LastName)
         {
+            if (!IsValid(EmailID)) { return false; }
+
             SqlConnection conn = null;
             SqlDataReader rdr = null;
 

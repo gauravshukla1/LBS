@@ -8,42 +8,11 @@ using System.Web;
 
 namespace Website.Models
 {
-    public class LibraryLibrarian
+    public class LibraryLibrarian : LibraryUser
     {
-        private string _Title;
-        private string _Author;
-        private string _ISBN;
-        private string _Query;
-        private string _EmailID;
-
-        public string Title
+        public LibraryLibrarian(String emailid) : base(emailid)
         {
-            get { return _Title; }
-            set { this._Title = value; }
-        }
 
-        public string Author
-        {
-            get { return _Author; }
-            set { this._Author = value; }
-        }
-
-        public string ISBN
-        {
-            get { return _ISBN; }
-            set { this._ISBN = value; }
-        }
-
-        public string Query
-        {
-            get { return _Query; }
-            set { this._Query = value; }
-        }
-
-        public string EmailID
-        {
-            get { return _EmailID; }
-            set { this._EmailID = value; }
         }
 
         public List<List<string>> AllCheckedOut()

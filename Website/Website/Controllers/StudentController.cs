@@ -10,7 +10,7 @@ namespace Website.Controllers
     {
         public ActionResult ViewIfStudentLoggedIn()
         {
-            string login_type = Convert.ToString(Session["login_type"]).Trim();
+            string login_type = Convert.ToString(Session["login_type"]);
             if (login_type != null)
             {
                 if (login_type == "Student") { return View(); }
@@ -23,13 +23,15 @@ namespace Website.Controllers
         // GET: Student
         public ActionResult Index()
         {
+            Models.LibraryStudent student = new Models.LibraryStudent(Convert.ToString(Session["EmailID"]));
+            ViewBag.Message = student.FirstName+" "+student.LastName;
             return ViewIfStudentLoggedIn();
         }
 
         [HttpGet]
         public ActionResult Search()
         {
-            Models.LibraryStudent student = new Models.LibraryStudent();
+            Models.LibraryStudent student = new Models.LibraryStudent(Convert.ToString(Session["EmailID"]));
             ViewBag.Results = student.Search(Request.QueryString["Term"], Request.QueryString["Criteria"]);
             return ViewIfStudentLoggedIn();
         }
@@ -37,15 +39,15 @@ namespace Website.Controllers
         [HttpGet]
         public ActionResult CheckOut()
         {
-            Models.LibraryStudent student = new Models.LibraryStudent();
-            Session["Message"] = student.CheckOut(Request.QueryString["ISBN"], Convert.ToString(Session["EmailID"]));
+            Models.LibraryStudent student = new Models.LibraryStudent(Convert.ToString(Session["EmailID"]));
+            Session["Message"] = student.CheckOut(Request.QueryString["ISBN"]);
             return RedirectToAction("AllCheckedOut", "Student");
         }
 
         public ActionResult AllCheckedOut()
         {
-            Models.LibraryStudent student = new Models.LibraryStudent();
-            ViewBag.Results = student.AllCheckedOut(Convert.ToString(Session["EmailID"]));
+            Models.LibraryStudent student = new Models.LibraryStudent(Convert.ToString(Session["EmailID"]));
+            ViewBag.Results = student.AllCheckedOut();
             return ViewIfStudentLoggedIn();
         }
 

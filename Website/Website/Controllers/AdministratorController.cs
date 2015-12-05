@@ -10,7 +10,7 @@ namespace Website.Controllers
     {
         public ActionResult ViewIfAdminLoggedIn()
         {
-            string login_type = Convert.ToString(Session["login_type"]).Trim();
+            string login_type = Convert.ToString(Session["login_type"]);
             if (login_type != null)
             {
                 if (login_type == "Student") { return RedirectToAction("Index", "Student"); }
