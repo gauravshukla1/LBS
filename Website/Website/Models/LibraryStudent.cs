@@ -150,7 +150,7 @@ namespace Website.Models
             }
             List<List<string>> array_list = new List<List<string>>();
 
-            foreach(DataRow row in table.Rows)
+            foreach (DataRow row in table.Rows)
             {
                 List<string> temp = new List<string>();
                 temp.Add(row["ISBN"].ToString());
@@ -163,10 +163,70 @@ namespace Website.Models
             return array_list;
         }
 
-        public string CheckOut(string ISBN,string emaildId)
+        public string CheckOut(string ISBN, string emailId)
         {
-            string msg;
-            return "";
+            string msg = "Checkout Failure\n Please try again..!!";
+            SqlConnection conn = null;
+            SqlDataReader rdr = null;
+
+            try
+            {
+                conn = new SqlConnection(@"Data Source = (LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\LMS_DB.mdf;Integrated Security = True");
+                conn.Open();
+                SqlCommand cmd = new SqlCommand("dbo.Librarian_CheckBorrowable", conn);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cmd.Parameters.Add("@email_id", SqlDbType.NVarChar).Value = emailId;
+                // Add the output parameter and set its properties.
+                SqlParameter outparameter = new SqlParameter();
+                outparameter.ParameterName = "@Number";
+                outparameter.SqlDbType = SqlDbType.Int;
+                //outparameter.Size = 12;
+                outparameter.Direction = ParameterDirection.Output;
+
+
+                // Add the parameter to the Parameters collection. 
+                cmd.Parameters.Add(outparameter);
+
+                cmd.ExecuteNonQuery();
+                int returnValue = Convert.ToInt32(cmd.Parameters["@Number"].Value);
+
+                if (returnValue == 0)
+                    return "Cannot borrow any more books";
+                else
+                {
+                    cmd = new SqlCommand("dbo.Student_Checkout", conn);
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    cmd.Parameters.Add("@email_id", SqlDbType.NVarChar).Value = emailId;
+                    cmd.Parameters.Add("@ISBN", SqlDbType.NVarChar).Value = ISBN;
+
+                    SqlParameter retValue = cmd.Parameters.Add("return", SqlDbType.Int);
+                    retValue.Direction = ParameterDirection.ReturnValue;
+                    cmd.ExecuteNonQuery(); // MISSING
+                    int returnvalue = (int)retValue.Value;
+
+                    if (returnvalue == 0)
+                        return "CheckOut Successful";
+
+                }
+            }
+            catch (Exception)
+            {
+
+            }
+            finally
+            {
+                if (conn != null)
+                {
+                    conn.Close();
+                }
+                if (rdr != null)
+                {
+                    rdr.Close();
+                }
+            }
+            return msg;
         }
     }
 }

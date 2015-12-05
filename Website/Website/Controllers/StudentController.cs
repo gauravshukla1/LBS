@@ -12,8 +12,8 @@ namespace Website.Controllers
         public ActionResult Index()
         {
             //Temporary redirect
-            RedirectToAction("CheckOutBook");
-            return View();
+            return RedirectToAction("CheckOutBook");
+            //return View();
         }
 
         [HttpGet]
@@ -45,6 +45,7 @@ namespace Website.Controllers
             //student.ISBN = "9780784413531";
             //student.EmailID = Convert.ToString(Session["EmailID"]);
             string msg = student.CheckOut("9780784413531", Convert.ToString(Session["EmailID"]));
+            ViewBag.Message = msg;
             return View();
         }
 
