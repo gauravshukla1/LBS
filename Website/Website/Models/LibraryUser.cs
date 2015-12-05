@@ -45,12 +45,6 @@ namespace Website.Models
             get { return _login_type; }
             set { this._login_type = value; }
         }
-        public String Authenticate(String EmailID,String Password)
-        {
-            String userType = "";
-
-            return userType;
-        }
 
         public void AddStudent(String EmailID, String Password)
         {
@@ -103,7 +97,7 @@ namespace Website.Models
             }
         }
 
-        public bool IsValid(String EmailID, String Password)
+        public bool Authenticate(String EmailID, String Password)
         {
             //return true;
             SqlConnection conn = null;

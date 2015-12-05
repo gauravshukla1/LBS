@@ -163,6 +163,32 @@ namespace Website.Models
             return array_list;
         }
 
+        public List<List<string>> AllCheckedOut(string emailId)
+        {
+            SqlConnection con;
+            DataTable table = new DataTable();
+            con = new SqlConnection(@"Data Source = (LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\LMS_DB.mdf;Integrated Security = True");
+            using (var cmd = new SqlCommand("Student_AllCheckedOut", con))
+            using (var da = new SqlDataAdapter(cmd))
+            {
+                cmd.Parameters.Add("@email_id", SqlDbType.NVarChar).Value = emailId;
+                cmd.CommandType = CommandType.StoredProcedure;
+                da.Fill(table);
+            }
+            List<List<string>> array_list = new List<List<string>>();
+
+            foreach (DataRow row in table.Rows)
+            {
+                List<string> temp = new List<string>();
+                temp.Add(row["ISBN"].ToString());
+                temp.Add(row["Title"].ToString());
+                temp.Add(row["Checkout_Date"].ToString());
+                temp.Add(row["Due_Date"].ToString());
+                array_list.Add(temp);
+            }
+            return array_list;
+        }
+
         public string CheckOut(string ISBN, string emailId)
         {
             string msg = "Checkout Failure\n Please try again..!!";

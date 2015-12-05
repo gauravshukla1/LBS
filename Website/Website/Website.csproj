@@ -115,6 +115,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\LibraryLibrarian.cs" />
     <Compile Include="Models\LibraryStudent.cs" />
     <Compile Include="Models\LibraryUser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -136,7 +137,10 @@
     <Content Include="Views\Administrator\Index.cshtml" />
     <Content Include="Views\Student\Index.cshtml" />
     <Content Include="Views\Student\Search.cshtml" />
-    <Content Include="Views\Student\CheckOutBook.cshtml" />
+    <Content Include="Views\Student\AllCheckedOut.cshtml" />
+    <Content Include="Views\Student\_Layout.cshtml" />
+    <Content Include="Views\Librarian\_Layout.cshtml" />
+    <Content Include="Views\Librarian\AllCheckedOut.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

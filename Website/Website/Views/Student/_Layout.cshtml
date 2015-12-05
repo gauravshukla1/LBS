@@ -1,0 +1,74 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Library Management System</title>
+    <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <script src="~/Scripts/modernizr-2.6.2.js"></script>
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("Library Management System", "Index", "User", new { area = "" }, new { @class = "navbar-brand", @style = "text-decoration:bold" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    @if (Session["login_type"]!=null)
+                    {
+                        <li>@Html.ActionLink("Log Out", "LogOut", "User")</li>
+                    }
+                    else
+                    {
+                        <li>@Html.ActionLink("Register", "Registration", "User")</li>
+                        <li>@Html.ActionLink("Log In", "LogIn", "User")</li>
+                    }
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        <div class="row">
+            <div class="col-md-3">
+                    <hr>
+                <div style="text-align: center">
+                    <input name="searchtyper" type="radio" id="searchtype1" value="ISBN" onchange="document.getElementById('searchtypevalue').value=(this.value)">
+                    <label for="searchtype1">ISBN</label>
+                    <input name="searchtyper" type="radio" id="searchtype2" value="Title" onchange="document.getElementById('searchtypevalue').value=(this.value)" checked="checked">
+                    <label for="searchtype2">Title</label><br />
+                    <input name="searchtyper" type="radio" id="searchtype3" value="Author" onchange="document.getElementById('searchtypevalue').value=(this.value)">
+                    <label for="searchtype3">Author</label>
+                    <input name="searchtyper" type="radio" id="searchtype4" value="Category" onchange="document.getElementById('searchtypevalue').value=(this.value)">
+                    <label for="searchtype4">Category</label>
+                    <input name="searchtypevalue" id="searchtypevalue" type="hidden" value="Title">
+                    <input class="form-control" type='search' id='search' onkeypress="if(event.keyCode === 13){event.preventDefault();window.location='/Student/Search?Term='+document.getElementById('search').value+'&Criteria='+document.getElementById('searchtypevalue').value;}">
+                    <ul class="nav nav-pills nav-stacked">
+                        <li><a class='alert-info' onclick="window.location='/Student/Search?Term='+document.getElementById('search').value+'&Criteria='+document.getElementById('searchtypevalue').value;">Search</a></li>
+                        <li><hr /></li>
+                        <li><a href="/Student/Search?Criteria=ISBN&Term=">View All Books</a></li>
+                        <li>@Html.ActionLink("View CheckedOut", "AllCheckedOut", "Student")</li>
+                        <li>@Html.ActionLink("Student Home", "Index", "Student")</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-9">
+                @RenderBody()
+            </div>
+        </div>
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - Library Management System</p>
+        </footer>
+    </div>
+
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+</body>
+</html>
