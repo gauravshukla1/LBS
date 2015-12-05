@@ -8,56 +8,47 @@ namespace Website.Controllers
 {
     public class StudentController : Controller
     {
+        public ActionResult ViewIfStudentLoggedIn()
+        {
+            string login_type = Convert.ToString(Session["login_type"]);
+            if (login_type != null)
+            {
+                if (login_type == "Student") { return View(); }
+                if (login_type == "Librarian") { return RedirectToAction("Index", "Librarian"); }
+                if (login_type == "Admin") { return RedirectToAction("Index", "Administrator"); }
+                return RedirectToAction("LogOut", "User"); 
+            }
+                return RedirectToAction("Index", "User");            
+        }
         // GET: Student
         public ActionResult Index()
         {
-            //Temporary redirect
-            return RedirectToAction("CheckOutBook");
-            //return View();
+            Models.LibraryStudent student = new Models.LibraryStudent(Convert.ToString(Session["EmailID"]));
+            ViewBag.Message = student.FirstName+" "+student.LastName;
+            return ViewIfStudentLoggedIn();
         }
 
         [HttpGet]
         public ActionResult Search()
         {
-            Models.LibraryStudent student = new Models.LibraryStudent();
-            //string term = "Water Resource";
-            //List<List<String>> results = student.Search(term, "Title");
-            //string term = "Johnson";
-            //List<List<String>> results = student.Search(term, "Author");
-            string term = "";
-            List<List<String>> results = student.Search(term, "Category");
-            ViewBag.Results = results;
-            return View();
-        }
-
-        [HttpPost]
-        public ActionResult Search(Models.LibraryStudent student)
-        {
-            string term = "9780784413531";
-            List<List<String>> results = student.Search(term,"ISBN");
-            return View();
+            Models.LibraryStudent student = new Models.LibraryStudent(Convert.ToString(Session["EmailID"]));
+            ViewBag.Results = student.Search(Request.QueryString["Term"], Request.QueryString["Criteria"]);
+            return ViewIfStudentLoggedIn();
         }
 
         [HttpGet]
-        public ActionResult CheckOutBook()
+        public ActionResult CheckOut()
         {
-            Models.LibraryStudent student = new Models.LibraryStudent();
-            //student.ISBN = "9780784413531";
-            //student.EmailID = Convert.ToString(Session["EmailID"]);
-            string msg = student.CheckOut("9780784413531", Convert.ToString(Session["EmailID"]));
-            ViewBag.Message = msg;
-            return View();
+            Models.LibraryStudent student = new Models.LibraryStudent(Convert.ToString(Session["EmailID"]));
+            Session["Message"] = student.CheckOut(Request.QueryString["ISBN"]);
+            return RedirectToAction("AllCheckedOut", "Student");
         }
 
-        [HttpPost]
-        public ActionResult CheckOutBook(Models.LibraryStudent student)
+        public ActionResult AllCheckedOut()
         {
-            return View();
-        }
-
-        public ActionResult CheckedOutBook()
-        {
-            return View();
+            Models.LibraryStudent student = new Models.LibraryStudent(Convert.ToString(Session["EmailID"]));
+            ViewBag.Results = student.AllCheckedOut();
+            return ViewIfStudentLoggedIn();
         }
 
     }

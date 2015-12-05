@@ -8,42 +8,11 @@ using System.Web;
 
 namespace Website.Models
 {
-    public class LibraryStudent
+    public class LibraryStudent : LibraryUser
     {
-        private string _Title;
-        private string _Author;
-        private string _ISBN;
-        private string _Query;
-        private string _EmailID;
-
-        public string Title
+        public LibraryStudent(String emailid) : base(emailid)
         {
-            get { return _Title; }
-            set { this._Title = value; }
-        }
 
-        public string Author
-        {
-            get { return _Author; }
-            set { this._Author = value; }
-        }
-
-        public string ISBN
-        {
-            get { return _ISBN; }
-            set { this._ISBN = value; }
-        }
-
-        public string Query
-        {
-            get { return _Query; }
-            set { this._Query = value; }
-        }
-
-        public string EmailID
-        {
-            get { return _EmailID; }
-            set { this._EmailID = value; }
         }
 
         public List<List<String>> Search(string term, string category)
@@ -163,7 +132,33 @@ namespace Website.Models
             return array_list;
         }
 
-        public string CheckOut(string ISBN, string emailId)
+        public List<List<string>> AllCheckedOut()
+        {
+            SqlConnection con;
+            DataTable table = new DataTable();
+            con = new SqlConnection(@"Data Source = (LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\LMS_DB.mdf;Integrated Security = True");
+            using (var cmd = new SqlCommand("Student_AllCheckedOut", con))
+            using (var da = new SqlDataAdapter(cmd))
+            {
+                cmd.Parameters.Add("@email_id", SqlDbType.NVarChar).Value = this.EmailID;
+                cmd.CommandType = CommandType.StoredProcedure;
+                da.Fill(table);
+            }
+            List<List<string>> array_list = new List<List<string>>();
+
+            foreach (DataRow row in table.Rows)
+            {
+                List<string> temp = new List<string>();
+                temp.Add(row["ISBN"].ToString());
+                temp.Add(row["Title"].ToString());
+                temp.Add(row["Checkout_Date"].ToString());
+                temp.Add(row["Due_Date"].ToString());
+                array_list.Add(temp);
+            }
+            return array_list;
+        }
+
+        public string CheckOut(string ISBN)
         {
             string msg = "Checkout Failure\n Please try again..!!";
             SqlConnection conn = null;
@@ -176,7 +171,7 @@ namespace Website.Models
                 SqlCommand cmd = new SqlCommand("dbo.Librarian_CheckBorrowable", conn);
                 cmd.CommandType = CommandType.StoredProcedure;
 
-                cmd.Parameters.Add("@email_id", SqlDbType.NVarChar).Value = emailId;
+                cmd.Parameters.Add("@email_id", SqlDbType.NVarChar).Value = this.EmailID;
                 // Add the output parameter and set its properties.
                 SqlParameter outparameter = new SqlParameter();
                 outparameter.ParameterName = "@Number";
@@ -198,7 +193,7 @@ namespace Website.Models
                     cmd = new SqlCommand("dbo.Student_Checkout", conn);
                     cmd.CommandType = CommandType.StoredProcedure;
 
-                    cmd.Parameters.Add("@email_id", SqlDbType.NVarChar).Value = emailId;
+                    cmd.Parameters.Add("@email_id", SqlDbType.NVarChar).Value = this.EmailID;
                     cmd.Parameters.Add("@ISBN", SqlDbType.NVarChar).Value = ISBN;
 
                     SqlParameter retValue = cmd.Parameters.Add("return", SqlDbType.Int);

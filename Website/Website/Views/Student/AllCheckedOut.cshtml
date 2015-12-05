@@ -1,0 +1,26 @@
+﻿
+@{
+    ViewBag.Title = "CheckOut";
+    Layout = "~/Views/Student/_Layout.cshtml";
+}
+<h2></h2>
+<p style="color:dodgerblue">@Session["Message"]</p>
+@{Session.Remove("Message");}
+
+<table class="table table-responsive table-striped">
+    <tr>
+        <th>ISBN</th>
+        <th>Title</th>
+        <th>Checkout Date</th>
+        <th>Due Date</th>
+    </tr>
+    @foreach (List<string> tmp in ViewBag.Results)
+    {
+        <tr>
+            <td>@tmp.ElementAt(0)</td>
+            <td>@tmp.ElementAt(1)</td>
+            <td>@tmp.ElementAt(2).AsDateTime().ToString("M-d-yyyy")</td>
+            <td>@tmp.ElementAt(3).AsDateTime().ToString("M-d-yyyy")</td>
+        </tr>
+    }
+</table>

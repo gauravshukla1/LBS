@@ -1,18 +1,19 @@
 ﻿@model List<List<string>>
 @{
     ViewBag.Title = "Search";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Student/_Layout.cshtml";
 }
 @ViewBag.Message
-<h2>Search Result</h2>
+<h2>Books</h2>
 
-<table>
+<table class="table table-responsive table-striped">
     <tr>
         <th>ISBN</th>
         <th>Title</th>
         <th>Author</th>
         <th>Category</th>
         <th>Qty Available</th>
+        <th>CheckOut</th>
     </tr>
     @foreach(List<string> tmp in ViewBag.Results)
     {
@@ -22,6 +23,7 @@
             <td>@tmp.ElementAt(2)</td>
             <td>@tmp.ElementAt(3)</td>
             <td>@tmp.ElementAt(4)</td>
+            <td><button onclick="window.location='/Student/CheckOut?ISBN=@tmp.ElementAt(0)'" class="btn-primary">CheckOut</button></td>
         </tr>
     }
 </table>

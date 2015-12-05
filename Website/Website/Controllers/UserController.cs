@@ -13,65 +13,68 @@ namespace Website.Controllers
 {
     public class UserController : Controller
     {
-        //private string login_type;
-        
-        // GET: User
-        public ActionResult Index()
+        public ActionResult ViewIfNoOneLoggedIn()
         {
-            string login_type = Convert.ToString(Session["login_type"]).Trim();
-            if (login_type != null) {
-                if (login_type == "Student") { return RedirectToAction("Index","Student"); }
+            string login_type = Convert.ToString(Session["login_type"]);
+            if (login_type != null)
+            {
+                if (login_type == "Student") { return RedirectToAction("Index", "Student"); }
                 if (login_type == "Librarian") { return RedirectToAction("Index", "Librarian"); }
                 if (login_type == "Admin") { return RedirectToAction("Index", "Administrator"); }
             }
             return View();
-            
+        }
+        //private string login_type;
+
+        // GET: User
+        public ActionResult Index()
+        {
+            return ViewIfNoOneLoggedIn();            
         }
 
         [HttpGet]
         public ActionResult LogIn()
         {
-
-            return View();
+            return ViewIfNoOneLoggedIn();
         }
 
         [HttpPost]
         public ActionResult LogIn(Models.LibraryUser user)
         {
-            if(user.IsValid(user.EmailID,user.Password))                            
+            if(user.Authenticate(user.EmailID,user.Password))                            
             {
                 FormsAuthentication.SetAuthCookie(user.EmailID, false);
                 /*ViewBag.Message = login_type;
                 return View();*/
                 Session["login_type"] = user.login_type;
-                Session["EmailID"] = user.EmailID;
+                Session["EmailID"] = user.EmailID.Trim();
                 return RedirectToAction("Index");
             }
             else
             {
                 ModelState.AddModelError("", "Log In Data is Incorrect");
             }
-            return View();
+            return ViewIfNoOneLoggedIn();
         }
 
         
         public ActionResult LogOut()
         {
-            Session.Clear();
-            return View();
+            Session.Clear(); Session.Abandon();
+            return ViewIfNoOneLoggedIn();
         }
 
 
         [HttpGet]
         public ActionResult Registration()
         {
-            return View();
+            return ViewIfNoOneLoggedIn();
         }
 
         [HttpPost]
         public ActionResult Registration(Models.LibraryUser user)
         {
-            if (user.StoreUser(user.EmailID, user.Password,user.FirstName,user.LastName))
+            if (user.AddUser(user.EmailID, user.Password,user.FirstName,user.LastName))
             {
                 return RedirectToAction("Index","User");
             }
@@ -79,9 +82,7 @@ namespace Website.Controllers
             {
                 ModelState.AddModelError("", "Registration Data is Incorrect");
             }
-            return View();
+            return ViewIfNoOneLoggedIn();
         }
-        
-        
     }
 }
