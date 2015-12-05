@@ -144,6 +144,7 @@
     <Content Include="Views\Librarian\AllCheckedOut.cshtml" />
     <Content Include="Views\Administrator\_Layout.cshtml" />
     <Content Include="Views\Administrator\AddBook.cshtml" />
+    <Content Include="Views\Administrator\AddLibrarian.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

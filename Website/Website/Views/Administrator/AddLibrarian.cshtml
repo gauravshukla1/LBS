@@ -1,0 +1,45 @@
+﻿@model Website.Models.LibraryAdministrator
+@{
+    ViewBag.Title = "AddLibrarian";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>AddLibrarian</h2>
+@ViewBag.Message
+<div class="form-horizontal">
+    <h2 style="text-transform:uppercase">Add Librarian</h2>
+    <hr />
+    @using (Html.BeginForm())
+    {
+        @Html.ValidationSummary(true, "Add Librarian Failed. Please try again..!!")
+        <div class="form-group">
+            <div class="col-md-10">
+                @Html.LabelFor(u => u.EmailID)
+                @Html.TextBoxFor(u => u.EmailID, new { @class = "form-control" })
+                @Html.ValidationMessageFor(u => u.EmailID)
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-10">
+                @Html.LabelFor(u => u.Password)
+                @Html.TextBoxFor(u => u.Password, new { @class = "form-control" })
+                @Html.ValidationMessageFor(u => u.Password)
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-10">
+                @Html.LabelFor(u => u.FirstName)
+                @Html.TextBoxFor(u => u.FirstName, new { @class = "form-control" })
+                @Html.ValidationMessageFor(u => u.FirstName)
+            </div>
+        </div>
+            <div class="form-group">
+                <div class="col-md-10">
+                    @Html.LabelFor(u => u.LastName)
+                    @Html.TextBoxFor(u => u.LastName, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(u => u.LastName)
+                </div>
+            </div>
+            <input type="submit" value="AddBook" class="btn btn-default" />
+    }
+</div>

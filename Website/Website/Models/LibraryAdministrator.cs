@@ -84,8 +84,7 @@ namespace Website.Models
             conn.Open();
             SqlCommand cmd = new SqlCommand("dbo.Administrator_AddBook", conn);
             cmd.CommandType = CommandType.StoredProcedure;
-
-            //cmd.Parameters.Add("@email_id", SqlDbType.NVarChar).Value = emailId;
+            
             cmd.Parameters.Add("@ISBN", SqlDbType.NVarChar).Value = ISBN;
             cmd.Parameters.Add("@Title", SqlDbType.NVarChar).Value = Title;
             cmd.Parameters.Add("@Author", SqlDbType.NVarChar).Value = Author;
@@ -97,6 +96,24 @@ namespace Website.Models
 
             cmd.ExecuteNonQuery();
             return "Add Book Successful";
+        }
+
+        public string AddLibrarian()
+        {
+            SqlConnection conn = null;
+
+            conn = new SqlConnection(@"Data Source = (LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\LMS_DB.mdf;Integrated Security = True");
+            conn.Open();
+            SqlCommand cmd = new SqlCommand("dbo.Administrator_AddLibrarian", conn);
+            cmd.CommandType = CommandType.StoredProcedure;
+            
+            cmd.Parameters.Add("@email_id", SqlDbType.NVarChar).Value = EmailID;
+            cmd.Parameters.Add("@password", SqlDbType.NVarChar).Value = Password;
+            cmd.Parameters.Add("@firstname", SqlDbType.NVarChar).Value = FirstName;
+            cmd.Parameters.Add("@lastname", SqlDbType.NVarChar).Value = LastName;
+
+            cmd.ExecuteNonQuery();
+            return "Add Librarian Successful";
         }
     }
 }

@@ -39,5 +39,19 @@ namespace Website.Controllers
             ViewBag.Message = msg;
             return ViewIfAdminLoggedIn();
         }
+
+        [HttpGet]
+        public ActionResult AddLibrarian()
+        {
+            return ViewIfAdminLoggedIn();
+        }
+
+        [HttpPost]
+        public ActionResult AddLibrarian(Models.LibraryAdministrator admin)
+        {
+            string msg = admin.AddLibrarian();
+            ViewBag.Message = msg;
+            return ViewIfAdminLoggedIn();
+        }
     }
 }
