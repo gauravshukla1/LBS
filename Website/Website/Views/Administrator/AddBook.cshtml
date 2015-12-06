@@ -3,11 +3,11 @@
     ViewBag.Title = "AddBook";
     Layout = "~/Views/Administrator/_Layout.cshtml";
 }
-
+<p style="color:dodgerblue">
+    @ViewBag.Message
 <h2>AddBook</h2>
-@ViewBag.Message
 <div class="form-horizontal">
-    <h2 style="text-transform:uppercase">Add Book</h2>
+    <!--<h2 style="text-transform:uppercase">Add Book</h2>-->
     <hr />
     @using (Html.BeginForm())
     {

@@ -95,7 +95,7 @@ namespace Website.Models
             cmd.Parameters.Add("@Location", SqlDbType.NVarChar).Value = Location;
 
             cmd.ExecuteNonQuery();
-            return "Add Book Successful";
+            return "Successfully added the book";
         }
 
         public string AddLibrarian()
@@ -116,7 +116,7 @@ namespace Website.Models
             cmd.Parameters.Add("@lastname", SqlDbType.NVarChar).Value = LastName;
 
             cmd.ExecuteNonQuery();
-            return "Add Librarian Successful";
+            return "Successfully added the librarian";
         }
     }
 }

@@ -51,6 +51,7 @@ namespace Website.Controllers
         {
             string msg = admin.AddLibrarian();
             ViewBag.Message = msg;
+            
             return ViewIfAdminLoggedIn();
         }
     }
