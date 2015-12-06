@@ -1,7 +1,7 @@
 ﻿@model Website.Models.LibraryAdministrator
 @{
     ViewBag.Title = "AddLibrarian";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Administrator/_Layout.cshtml";
 }
 
 <h2>AddLibrarian</h2>
@@ -40,6 +40,6 @@
                     @Html.ValidationMessageFor(u => u.LastName)
                 </div>
             </div>
-            <input type="submit" value="AddBook" class="btn btn-default" />
+            <input type="submit" value="AddLibrarian" class="btn btn-default" />
     }
 </div>

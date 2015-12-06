@@ -20,19 +20,19 @@ namespace Website.Models
         }
 
         protected string _ISBN;
-            protected string _Title;
-            protected string _Author;
-            protected string _Category;
-            protected string _Publisher;
-            protected int _Year_Published;
-            protected int _Quantity;
-            protected string _Location;
+        protected string _Title;
+        protected string _Author;
+        protected string _Category;
+        protected string _Publisher;
+        protected int _Year_Published;
+        protected int _Quantity;
+        protected string _Location;
 
-            public string ISBN
-            {
-                get { return _ISBN; }
-                set { _ISBN = value; }
-            }
+        public string ISBN
+        {
+            get { return _ISBN; }
+            set { _ISBN = value; }
+        }
 
         public string Title
         {
@@ -48,9 +48,9 @@ namespace Website.Models
 
         public string Category
         {
-                get { return _Category; }
-                set { _Category = value; }
-            }
+             get { return _Category; }
+             set { _Category = value; }
+        }
 
         public string Publisher
         {
@@ -58,17 +58,17 @@ namespace Website.Models
             set { _Publisher = value; }
         }
 
-            public int Year_Published
+        public int Year_Published
         {
-                get { return _Year_Published; }
-                set { _Year_Published = value; }
-            }
+            get { return _Year_Published; }
+            set { _Year_Published = value; }
+        }
 
-            public int Quantity
-            {
-                get { return _Quantity; }
-                set { _Quantity = value; }
-            }
+        public int Quantity
+       {
+            get { return _Quantity; }
+            set { _Quantity = value; }
+       }
 
         public string Location
         {
@@ -100,6 +100,9 @@ namespace Website.Models
 
         public string AddLibrarian()
         {
+            Models.LibraryUser lib_user = new Models.LibraryUser();
+            if (! lib_user.IsValid(EmailID)) { return "Not valid Email ID"; }
+
             SqlConnection conn = null;
 
             conn = new SqlConnection(@"Data Source = (LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\LMS_DB.mdf;Integrated Security = True");

@@ -95,7 +95,7 @@ namespace Website.Models
                 MailAddress m = new MailAddress(EmailID);
                 if (EmailID.Contains("@colorado.edu"))
                 {
-                    AcceptEmail();
+                    //AcceptEmail();
                     return true;
                 }
             }
