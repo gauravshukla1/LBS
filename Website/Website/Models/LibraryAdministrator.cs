@@ -34,7 +34,7 @@ namespace Website.Models
             cmd.Parameters.Add("@lastname", SqlDbType.NVarChar).Value = librarian.LastName;
 
             cmd.ExecuteNonQuery();
-            return "Successfully added the librarian";
+            return "Successfully added the librarian.";
         }
 
         public String UpdateLibrarian(LibraryLibrarian librarian)
@@ -53,7 +53,7 @@ namespace Website.Models
             cmd.Parameters.Add("@LastName", SqlDbType.NVarChar).Value = librarian.LastName;
 
             cmd.ExecuteNonQuery();
-            return "Successfully updated the librarian";
+            return "Successfully updated the librarian. Password has been reset to 1234.";
         }
 
         public String DeleteLibrarian(LibraryLibrarian librarian)
@@ -69,7 +69,7 @@ namespace Website.Models
             cmd.Parameters.Add("@Id", SqlDbType.NVarChar).Value = librarian.Id;
 
             cmd.ExecuteNonQuery();
-            return "Successfully Deleted the librarian";
+            return "Successfully Deleted the librarian.";
         }
 
         public List<LibraryLibrarian> AllLibrarians()
