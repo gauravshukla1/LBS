@@ -15,7 +15,7 @@ namespace Website.Controllers
     {
         public ActionResult ViewIfNoOneLoggedIn()
         {
-            string login_type = Convert.ToString(Session["login_type"]);
+            String login_type = Convert.ToString(Session["login_type"]);
             if (login_type != null)
             {
                 if (login_type == "Student") { return RedirectToAction("Index", "Student"); }
@@ -24,7 +24,7 @@ namespace Website.Controllers
             }
             return View();
         }
-        //private string login_type;
+        //private String login_type;
 
         // GET: User
         public ActionResult Index()

@@ -16,3 +16,11 @@ textarea {
     max-width: 280px;
 }
 
+
+div.no-margin {
+    margin:2px;padding:1px;
+}
+
+input.no-padding {
+    padding:1px;
+}

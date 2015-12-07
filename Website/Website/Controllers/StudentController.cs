@@ -10,7 +10,7 @@ namespace Website.Controllers
     {
         public ActionResult ViewIfStudentLoggedIn()
         {
-            string login_type = Convert.ToString(Session["login_type"]);
+            String login_type = Convert.ToString(Session["login_type"]);
             if (login_type != null)
             {
                 if (login_type == "Student") { return View(); }

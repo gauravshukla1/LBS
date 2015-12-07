@@ -10,42 +10,60 @@ namespace Website.Models
 {
     public class LibraryUser
     {
-        protected string _EmailID;
-        protected string _Password;
-        protected string _FirstName;
-        protected string _LastName;
-        protected string _login_type;
-        protected string Books_Allowed;
-        protected string Books_Borrowed;
+        protected int _Id;
+        protected String _EmailID;
+        protected String _Password;
+        protected String _FirstName;
+        protected String _LastName;
+        protected String _login_type;
+        protected int _Books_Allowed;
+        protected int _Books_Borrowed;
 
-        public string EmailID
+        public int Id {
+            get { return _Id; }
+            set { _Id = value; }
+        }
+
+        public String EmailID
         {
             get { return _EmailID; }
             set { _EmailID = value; }
         }
 
-        public string Password
+        public String Password
         {
             get { return _Password; }
             set { _Password = value; }
         }
 
-        public string FirstName
+        public String FirstName
         {
             get { return _FirstName; }
             set { _FirstName = value; }
         }
 
-        public string LastName
+        public String LastName
         {
             get { return _LastName; }
             set { _LastName = value; }
         }
 
-        public string login_type
+        public String login_type
         {
             get { return _login_type; }
             set { _login_type = value; }
+        }
+
+        public int Books_Allowed
+        {
+            get { return _Books_Allowed; }
+            set { _Books_Allowed = value; }
+        }
+
+        public int Books_Borrowed
+        {
+            get { return _Books_Borrowed; }
+            set { _Books_Borrowed = value; }
         }
 
         public LibraryUser()
@@ -67,13 +85,13 @@ namespace Website.Models
 
             foreach (DataRow row in table.Rows)
             {
-                this.FirstName=(row["FirstName"].ToString());
-                this.LastName = (row["LastName"].ToString());
-                this.EmailID = (row["Email_ID"].ToString());
-                this.Password = (row["Password"].ToString());
-                this.login_type = (row["Login_Type"].ToString());
-                this.Books_Allowed = (row["Books_Allowed"].ToString());
-                this.Books_Borrowed = (row["Books_Borrowed"].ToString());
+                this.FirstName=(row["FirstName"].ToString().Trim());
+                this.LastName = (row["LastName"].ToString().Trim());
+                this.EmailID = (row["Email_ID"].ToString().Trim());
+                this.Password = (row["Password"].ToString().Trim());
+                this.login_type = (row["Login_Type"].ToString().Trim());
+                this.Books_Allowed = Convert.ToInt32(row["Books_Allowed"].ToString().Trim());
+                this.Books_Borrowed = Convert.ToInt32(row["Books_Borrowed"].ToString().Trim());
             }
         }
 
@@ -88,7 +106,7 @@ namespace Website.Models
             //smtp.Send(message);
         }
 
-        public bool IsValid(string EmailID)
+        public bool IsValid(String EmailID)
         {
             try
             {
@@ -169,7 +187,7 @@ namespace Website.Models
             {
                 if (EmailID != null && Password != null && FirstName != null && LastName != null)
                 {
-                    // conn = new SqlConnection(WebConfigurationManager.ConnectionStrings["_connectionstring"].ConnectionString);
+                    // conn = new SqlConnection(WebConfigurationManager.ConnectionStrings["_connectionString"].ConnectionString);
                     conn = new SqlConnection(@"Data Source = (LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\LMS_DB.mdf;Integrated Security = True");
                     conn.Open();
                     SqlCommand cmd = new SqlCommand("dbo.User_AddStudent", conn);

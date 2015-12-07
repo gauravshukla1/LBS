@@ -1,4 +1,4 @@
-﻿@model Website.Models.LibraryAdministrator
+﻿@model Website.Models.Book
 @{
     ViewBag.Title = "AddBook";
     Layout = "~/Views/Administrator/_Layout.cshtml";
@@ -56,9 +56,9 @@
             </div>
             <div class="form-group">
                 <div class="col-md-10">
-                    @Html.LabelFor(u => u.Quantity)
-                    @Html.TextBoxFor(u => u.Quantity, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(u => u.Quantity)
+                    @Html.LabelFor(u => u.Quantity_Available)
+                    @Html.TextBoxFor(u => u.Quantity_Available, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(u => u.Quantity_Available)
                 </div>
             </div>
             <div class="form-group">
