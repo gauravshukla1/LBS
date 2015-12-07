@@ -12,14 +12,14 @@ namespace Website.Models
 
         }
 
-        public LibraryAdministrator():base()
+        public LibraryAdministrator() : base()
         {
 
         }
 
         public String AddLibrarian(LibraryLibrarian librarian)
         {
-            if (! librarian.IsValid(EmailID)) { return "Not valid Email ID"; }
+            if (!librarian.IsValid(EmailID)) { return "Not valid Email ID"; }
 
             SqlConnection conn = null;
 
@@ -27,7 +27,7 @@ namespace Website.Models
             conn.Open();
             SqlCommand cmd = new SqlCommand("dbo.Administrator_AddLibrarian", conn);
             cmd.CommandType = CommandType.StoredProcedure;
-            
+
             cmd.Parameters.Add("@email_id", SqlDbType.NVarChar).Value = librarian.EmailID;
             cmd.Parameters.Add("@password", SqlDbType.NVarChar).Value = librarian.Password;
             cmd.Parameters.Add("@firstname", SqlDbType.NVarChar).Value = librarian.FirstName;
@@ -89,11 +89,11 @@ namespace Website.Models
             foreach (DataRow row in table.Rows)
             {
                 LibraryLibrarian librarian = new LibraryLibrarian();
-                librarian.Id=Convert.ToInt32(row["ID"].ToString().Trim());
-                librarian.FirstName=(row["FirstName"].ToString().Trim());
-                librarian.LastName=(row["LastName"].ToString().Trim());
-                librarian.EmailID=(row["Email_ID"].ToString().Trim());
-                librarian.Password=(row["Password"].ToString().Trim());
+                librarian.Id = Convert.ToInt32(row["ID"].ToString().Trim());
+                librarian.FirstName = (row["FirstName"].ToString().Trim());
+                librarian.LastName = (row["LastName"].ToString().Trim());
+                librarian.EmailID = (row["Email_ID"].ToString().Trim());
+                librarian.Password = (row["Password"].ToString().Trim());
                 Librarian_List.Add(librarian);
             }
             return Librarian_List;

@@ -15,11 +15,12 @@
         <th class="col-sm-1">Location</th>
         <th class="col-sm-1">Publisher</th>
         <th class="col-sm-1" style="width:3em">Year</th>
-        
+
     </tr>
-        @foreach (Website.Models.Book book in ViewBag.Results)
-        {
-            <tr><td colspan="8">
+    @foreach (Website.Models.Book book in ViewBag.Results)
+    {
+        <tr>
+            <td colspan="8">
                 <form id="form_@book.Id" action="/Administrator/UpdateDeleteBook" method="post" name="form_@book.Id">
                     <input name="Id" id="id_@book.Id" value="@book.Id" type="hidden">
                     <input name="delete" id="delete_@book.Id" value="no" type="hidden">
@@ -30,17 +31,17 @@
                         <div class="col-sm-2 no-margin"><input name="Category" type="text" class="form-control no-padding" value="@book.Category" /></div>
                         <div class="col-sm-1 no-margin"><input name="Quantity_Available" type="text" class="form-control no-padding" value="@book.Quantity_Available" /></div>
                         <div class="col-sm-1 no-margin"><input name="Location" type="text" class="form-control no-padding" value="@book.Location" /></div>
-                        <div class="col-sm-1 no-margin"><input name="Publisher" type="text" class="form-control no-padding" value="@book.Publisher" /></div>   
-                        <div class="col-sm-1 no-margin"  style="width:3em"><input name="Year_Published" type="text" class="form-control no-padding" value="@book.Year_Published" /></div>   
+                        <div class="col-sm-1 no-margin"><input name="Publisher" type="text" class="form-control no-padding" value="@book.Publisher" /></div>
+                        <div class="col-sm-1 no-margin" style="width:3em"><input name="Year_Published" type="text" class="form-control no-padding" value="@book.Year_Published" /></div>
                     </div>
-                     <div class="row" style="margin-top:10px">
+                    <div class="row" style="margin-top:10px">
                         <div class="col-sm-6 text-right"><input value="Update" onclick="var r=confirm('Are you sure you want to edit?'); if(r) { document.getElementById('delete_@book.Id').value = 'no'; document.getElementById('form_@book.Id').submit();}" type="button" class="btn-primary" /></div>
                         <div class="col-sm-6 text-left"><input value="Delete" onclick="var r=confirm('Are you sure you want to delete?'); if(r) { document.getElementById('delete_@book.Id').value = 'yes';document.getElementById('form_@book.Id').submit();}" type="button" class="btn-danger" /></div>
-                     </div>
+                    </div>
                 </form>
-                
-                </td>
-            </tr>
-        }
+
+            </td>
+        </tr>
+    }
 </table>
 

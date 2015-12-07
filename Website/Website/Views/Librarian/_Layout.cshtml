@@ -21,7 +21,7 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav navbar-right">
-                    @if (Session["login_type"]!=null)
+                    @if (Session["login_type"] != null)
                     {
                         <li>@Html.ActionLink("Log Out", "LogOut", "User")</li>
                     }
@@ -38,11 +38,11 @@
         <div class="row">
             <div class="col-md-3">
                 <hr />
-                    <ul class="nav nav-pills nav-stacked">
-                        <li>@Html.ActionLink("View CheckedOut", "AllCheckedOut", "Librarian")</li>
-                        <li>@Html.ActionLink("Librarian Home", "Index", "Librarian")</li>
-                    </ul>
-                </div>
+                <ul class="nav nav-pills nav-stacked">
+                    <li>@Html.ActionLink("View CheckedOut", "AllCheckedOut", "Librarian")</li>
+                    <li>@Html.ActionLink("Librarian Home", "Index", "Librarian")</li>
+                </ul>
+            </div>
             <div class="col-md-9">
                 @RenderBody()
             </div>

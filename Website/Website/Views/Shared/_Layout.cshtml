@@ -21,7 +21,7 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav navbar-right">
-                    @if (Session["login_type"]!=null)
+                    @if (Session["login_type"] != null)
                     {
                         <li>@Html.ActionLink("Log Out", "LogOut", "User")</li>
                     }

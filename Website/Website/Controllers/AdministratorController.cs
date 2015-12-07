@@ -13,9 +13,9 @@ namespace Website.Controllers
                 if (login_type == "Student") { return RedirectToAction("Index", "Student"); }
                 if (login_type == "Librarian") { return RedirectToAction("Index", "Librarian"); }
                 if (login_type == "Admin") { return View(); }
-                return RedirectToAction("LogOut", "User"); 
+                return RedirectToAction("LogOut", "User");
             }
-                return RedirectToAction("Index","User");
+            return RedirectToAction("Index", "User");
         }
         // GET: Adminstrator
         public ActionResult Index()
@@ -54,7 +54,7 @@ namespace Website.Controllers
         [HttpGet]
         public ActionResult UpdateDeleteBook()
         {
-            Models.Book book= new Models.Book();
+            Models.Book book = new Models.Book();
             ViewBag.Results = book.AllBooks();
             return ViewIfAdminLoggedIn();
         }

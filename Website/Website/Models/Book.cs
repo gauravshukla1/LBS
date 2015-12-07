@@ -16,7 +16,7 @@ namespace Website.Models
         protected int _Year_Published;
         protected int _Quantity_Available;
         protected String _Location;
-        
+
         public int Id
         {
             get { return _Id; }
@@ -150,15 +150,15 @@ namespace Website.Models
             foreach (DataRow row in table.Rows)
             {
                 Book temp = new Book();
-                temp.Id=Convert.ToInt32(row["Id"].ToString().Trim());
-                temp.ISBN=(row["ISBN"].ToString().Trim());
-                temp.Title=(row["Title"].ToString().Trim());
-                temp.Author=(row["Author"].ToString().Trim());
-                temp.Category=(row["Category"].ToString().Trim());
-                temp.Quantity_Available=Convert.ToInt32(row["Quantity_Available"].ToString().Trim());
-                temp.Location=(row["Location"].ToString().Trim());
-                temp.Publisher=(row["Publisher"].ToString().Trim());
-                temp.Year_Published=Convert.ToInt32(row["Year_Published"].ToString().Trim());
+                temp.Id = Convert.ToInt32(row["Id"].ToString().Trim());
+                temp.ISBN = (row["ISBN"].ToString().Trim());
+                temp.Title = (row["Title"].ToString().Trim());
+                temp.Author = (row["Author"].ToString().Trim());
+                temp.Category = (row["Category"].ToString().Trim());
+                temp.Quantity_Available = Convert.ToInt32(row["Quantity_Available"].ToString().Trim());
+                temp.Location = (row["Location"].ToString().Trim());
+                temp.Publisher = (row["Publisher"].ToString().Trim());
+                temp.Year_Published = Convert.ToInt32(row["Year_Published"].ToString().Trim());
                 Book_Array.Add(temp);
             }
             return Book_Array;

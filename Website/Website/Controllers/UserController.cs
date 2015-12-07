@@ -22,7 +22,7 @@ namespace Website.Controllers
         // GET: User
         public ActionResult Index()
         {
-            return ViewIfNoOneLoggedIn();            
+            return ViewIfNoOneLoggedIn();
         }
 
         [HttpGet]
@@ -34,7 +34,7 @@ namespace Website.Controllers
         [HttpPost]
         public ActionResult LogIn(Models.LibraryUser user)
         {
-            if(user.Authenticate(user))                            
+            if (user.Authenticate(user))
             {
                 FormsAuthentication.SetAuthCookie(user.EmailID, false);
                 Session["login_type"] = user.login_type;
@@ -48,7 +48,7 @@ namespace Website.Controllers
             return ViewIfNoOneLoggedIn();
         }
 
-        
+
         public ActionResult LogOut()
         {
             Session.Clear(); Session.Abandon();
@@ -67,7 +67,7 @@ namespace Website.Controllers
         {
             if (user.AddUser(user))
             {
-                return RedirectToAction("Index","User");
+                return RedirectToAction("Index", "User");
             }
             else
             {

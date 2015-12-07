@@ -12,7 +12,7 @@ namespace Website.Models
 
         }
 
-        public LibraryStudent() :base()
+        public LibraryStudent() : base()
         {
 
         }

@@ -12,7 +12,7 @@ namespace Website.Models
 
         }
 
-        public LibraryLibrarian():base()
+        public LibraryLibrarian() : base()
         {
 
         }
@@ -52,7 +52,7 @@ namespace Website.Models
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.Add("@email_id", SqlDbType.NVarChar).Value = emailId;
             cmd.Parameters.Add("@ISBN", SqlDbType.NVarChar).Value = ISBN;
-            cmd.ExecuteNonQuery(); 
+            cmd.ExecuteNonQuery();
             return "Return Successful";
         }
     }

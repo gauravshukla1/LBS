@@ -8,7 +8,7 @@ namespace Website.Models
     interface Search
     {
         String term { get; set; }
-        List<Book> Search(); 
+        List<Book> Search();
     }
 
     class SearchByAuthor : Search

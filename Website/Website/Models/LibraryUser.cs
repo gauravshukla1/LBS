@@ -16,7 +16,8 @@ namespace Website.Models
         protected int _Books_Allowed;
         protected int _Books_Borrowed;
 
-        public int Id {
+        public int Id
+        {
             get { return _Id; }
             set { _Id = value; }
         }
@@ -82,7 +83,7 @@ namespace Website.Models
 
             foreach (DataRow row in table.Rows)
             {
-                this.FirstName=(row["FirstName"].ToString().Trim());
+                this.FirstName = (row["FirstName"].ToString().Trim());
                 this.LastName = (row["LastName"].ToString().Trim());
                 this.EmailID = (row["Email_ID"].ToString().Trim());
                 this.Password = (row["Password"].ToString().Trim());
@@ -149,7 +150,7 @@ namespace Website.Models
 
                 cmd.ExecuteNonQuery();
                 login_type = Convert.ToString(cmd.Parameters["@login_type"].Value).Trim();
-                
+
             }
             catch (Exception)
             {

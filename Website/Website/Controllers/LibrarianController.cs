@@ -15,7 +15,7 @@ namespace Website.Controllers
                 if (login_type == "Admin") { return RedirectToAction("Index", "Administrator"); }
                 return RedirectToAction("LogOut", "User");
             }
-                return RedirectToAction("Index", "User");
+            return RedirectToAction("Index", "User");
         }
         // GET: Library
         public ActionResult Index()
