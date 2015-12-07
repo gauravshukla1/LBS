@@ -1,10 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Web;
 
 namespace Website.Models
 {
@@ -49,17 +46,14 @@ namespace Website.Models
         public String ReturnBook(String ISBN, String emailId)
         {
             SqlConnection conn = null;
-
-                conn = new SqlConnection(@"Data Source = (LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\LMS_DB.mdf;Integrated Security = True");
-                conn.Open();
-                SqlCommand cmd = new SqlCommand("dbo.Librarian_ReturnBook", conn);
-                    cmd.CommandType = CommandType.StoredProcedure;
-
-                    cmd.Parameters.Add("@email_id", SqlDbType.NVarChar).Value = emailId;
-                    cmd.Parameters.Add("@ISBN", SqlDbType.NVarChar).Value = ISBN;
-
-                    cmd.ExecuteNonQuery(); 
-                    return "Return Successful";
+            conn = new SqlConnection(@"Data Source = (LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\LMS_DB.mdf;Integrated Security = True");
+            conn.Open();
+            SqlCommand cmd = new SqlCommand("dbo.Librarian_ReturnBook", conn);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.Add("@email_id", SqlDbType.NVarChar).Value = emailId;
+            cmd.Parameters.Add("@ISBN", SqlDbType.NVarChar).Value = ISBN;
+            cmd.ExecuteNonQuery(); 
+            return "Return Successful";
         }
     }
 }

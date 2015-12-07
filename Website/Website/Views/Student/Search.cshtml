@@ -1,5 +1,4 @@
-﻿@model List<List<string>>
-@{
+﻿@{
     ViewBag.Title = "Search";
     Layout = "~/Views/Student/_Layout.cshtml";
 }
@@ -15,15 +14,15 @@
         <th>Qty Available</th>
         <th>CheckOut</th>
     </tr>
-    @foreach(List<string> tmp in ViewBag.Results)
+    @foreach(Website.Models.Book book in ViewBag.Results)
     {
         <tr>
-            <td>@tmp.ElementAt(0)</td>
-            <td>@tmp.ElementAt(1)</td>
-            <td>@tmp.ElementAt(2)</td>
-            <td>@tmp.ElementAt(3)</td>
-            <td>@tmp.ElementAt(4)</td>
-            <td><button onclick="window.location='/Student/CheckOut?ISBN=@tmp.ElementAt(0)'" class="btn-primary">CheckOut</button></td>
+            <td>@book.ISBN</td>
+            <td>@book.Title</td>
+            <td>@book.Author</td>
+            <td>@book.Category</td>
+            <td>@book.Quantity_Available</td>
+            <td><button onclick="window.location='/Student/CheckOut?ISBN=@book.ISBN'" class="btn-primary">CheckOut</button></td>
         </tr>
     }
 </table>

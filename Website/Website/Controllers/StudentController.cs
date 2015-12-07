@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace Website.Controllers
@@ -31,8 +28,12 @@ namespace Website.Controllers
         [HttpGet]
         public ActionResult Search()
         {
-            Models.LibraryStudent student = new Models.LibraryStudent(Convert.ToString(Session["EmailID"]));
-            ViewBag.Results = student.Search(Request.QueryString["Term"], Request.QueryString["Criteria"]);
+            Website.Models.Search search;
+            if (Request.QueryString["Criteria"] == "Author")        { search = new Models.SearchByAuthor(Request.QueryString["Term"]); }
+            else if (Request.QueryString["Criteria"] == "ISBN")     { search = new Models.SearchByISBN(Request.QueryString["Term"]); }
+            else if (Request.QueryString["Criteria"] == "Category") { search = new Models.SearchByCategory(Request.QueryString["Term"]); }
+            else                                                    { search = new Models.SearchByTitle(Request.QueryString["Term"]); }
+            ViewBag.Results = search.Search();
             return ViewIfStudentLoggedIn();
         }
 

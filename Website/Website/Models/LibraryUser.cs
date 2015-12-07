@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Net.Mail;
 using System.Data;
 using System.Data.SqlClient;
@@ -113,7 +110,6 @@ namespace Website.Models
                 MailAddress m = new MailAddress(EmailID);
                 if (EmailID.Contains("@colorado.edu"))
                 {
-                    //AcceptEmail();
                     return true;
                 }
             }
@@ -124,7 +120,7 @@ namespace Website.Models
             return false;
         }
 
-        public bool Authenticate(String EmailID, String Password)
+        public bool Authenticate(LibraryUser user)
         {
             //return true;
             SqlConnection conn = null;
@@ -137,8 +133,8 @@ namespace Website.Models
                 SqlCommand cmd = new SqlCommand("dbo.User_Authenticate", conn);
                 cmd.CommandType = CommandType.StoredProcedure;
 
-                cmd.Parameters.Add("@email_id", SqlDbType.NVarChar).Value = EmailID;
-                cmd.Parameters.Add("@password", SqlDbType.NVarChar).Value = Password;
+                cmd.Parameters.Add("@email_id", SqlDbType.NVarChar).Value = user.EmailID;
+                cmd.Parameters.Add("@password", SqlDbType.NVarChar).Value = user.Password;
 
                 // Add the output parameter and set its properties.
                 SqlParameter outparameter = new SqlParameter();
@@ -176,7 +172,7 @@ namespace Website.Models
                 return false;
         }
 
-        public bool AddUser(String EmailID, String Password, String FirstName, String LastName)
+        public bool AddUser(LibraryUser user)
         {
             if (!IsValid(EmailID)) { return false; }
 
@@ -185,7 +181,7 @@ namespace Website.Models
 
             try
             {
-                if (EmailID != null && Password != null && FirstName != null && LastName != null)
+                if (user.EmailID != null && user.Password != null && user.FirstName != null && user.LastName != null)
                 {
                     // conn = new SqlConnection(WebConfigurationManager.ConnectionStrings["_connectionString"].ConnectionString);
                     conn = new SqlConnection(@"Data Source = (LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\LMS_DB.mdf;Integrated Security = True");
@@ -200,7 +196,7 @@ namespace Website.Models
                     parameter1.ParameterName = "@email_id";
                     parameter1.SqlDbType = SqlDbType.NVarChar;
                     parameter1.Direction = ParameterDirection.Input;
-                    parameter1.Value = EmailID;
+                    parameter1.Value = user.EmailID;
 
                     // Add the parameter to the Parameters collection. 
                     cmd.Parameters.Add(parameter1);
@@ -210,7 +206,7 @@ namespace Website.Models
                     parameter2.ParameterName = "@password";
                     parameter2.SqlDbType = SqlDbType.NVarChar;
                     parameter2.Direction = ParameterDirection.Input;
-                    parameter2.Value = Password;
+                    parameter2.Value = user.Password;
 
                     // Add the parameter to the Parameters collection. 
                     cmd.Parameters.Add(parameter2);
@@ -220,7 +216,7 @@ namespace Website.Models
                     parameter3.ParameterName = "@firstname";
                     parameter3.SqlDbType = SqlDbType.NVarChar;
                     parameter3.Direction = ParameterDirection.Input;
-                    parameter3.Value = FirstName;
+                    parameter3.Value = user.FirstName;
 
                     // Add the parameter to the Parameters collection. 
                     cmd.Parameters.Add(parameter3);
@@ -230,7 +226,7 @@ namespace Website.Models
                     parameter4.ParameterName = "@lastname";
                     parameter4.SqlDbType = SqlDbType.NVarChar;
                     parameter4.Direction = ParameterDirection.Input;
-                    parameter4.Value = LastName;
+                    parameter4.Value = user.LastName;
 
                     // Add the parameter to the Parameters collection. 
                     cmd.Parameters.Add(parameter4);

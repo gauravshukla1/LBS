@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Web;
 
 namespace Website.Models
 {
@@ -78,16 +76,6 @@ namespace Website.Models
 
         }
 
-        public Book(String ISBN)
-        {
-
-        }
-
-        public Book(int Id)
-        {
-
-        }
-
         public String AddBook(Book book)
         {
             SqlConnection conn = null;
@@ -104,7 +92,6 @@ namespace Website.Models
             cmd.Parameters.Add("@Year_Published", SqlDbType.SmallInt).Value = book.Year_Published;
             cmd.Parameters.Add("@Quantity_Available", SqlDbType.Int).Value = book.Quantity_Available;
             cmd.Parameters.Add("@Location", SqlDbType.NVarChar).Value = book.Location;
-
 
             cmd.ExecuteNonQuery();
             return "Successfully added the book";

@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Data.SqlClient;
-using System.Linq;
-using System.Web;
-using System.Web.Configuration;
 using System.Web.Mvc;
 using System.Web.Security;
 
@@ -41,11 +34,9 @@ namespace Website.Controllers
         [HttpPost]
         public ActionResult LogIn(Models.LibraryUser user)
         {
-            if(user.Authenticate(user.EmailID,user.Password))                            
+            if(user.Authenticate(user))                            
             {
                 FormsAuthentication.SetAuthCookie(user.EmailID, false);
-                /*ViewBag.Message = login_type;
-                return View();*/
                 Session["login_type"] = user.login_type;
                 Session["EmailID"] = user.EmailID.Trim();
                 return RedirectToAction("Index");
@@ -74,7 +65,7 @@ namespace Website.Controllers
         [HttpPost]
         public ActionResult Registration(Models.LibraryUser user)
         {
-            if (user.AddUser(user.EmailID, user.Password,user.FirstName,user.LastName))
+            if (user.AddUser(user))
             {
                 return RedirectToAction("Index","User");
             }
