@@ -198,7 +198,7 @@ namespace Website.Models
 
                     SqlParameter retValue = cmd.Parameters.Add("return", SqlDbType.Int);
                     retValue.Direction = ParameterDirection.ReturnValue;
-                    cmd.ExecuteNonQuery(); // MISSING
+                    cmd.ExecuteNonQuery();
                     int returnvalue = (int)retValue.Value;
 
                     if (returnvalue == 0)

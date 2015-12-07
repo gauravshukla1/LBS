@@ -84,7 +84,7 @@ namespace Website.Models
             conn.Open();
             SqlCommand cmd = new SqlCommand("dbo.Administrator_AddBook", conn);
             cmd.CommandType = CommandType.StoredProcedure;
-            
+
             cmd.Parameters.Add("@ISBN", SqlDbType.NVarChar).Value = ISBN;
             cmd.Parameters.Add("@Title", SqlDbType.NVarChar).Value = Title;
             cmd.Parameters.Add("@Author", SqlDbType.NVarChar).Value = Author;
@@ -117,6 +117,83 @@ namespace Website.Models
 
             cmd.ExecuteNonQuery();
             return "Successfully added the librarian";
+        }
+
+        public List<List<string>> AllBooks()
+        {
+            //Displaying all books in the library for Admin to update or delete accordingly
+            SqlConnection con;
+            DataTable table = new DataTable();
+            con = new SqlConnection(@"Data Source = (LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\LMS_DB.mdf;Integrated Security = True");
+            using (var cmd = new SqlCommand("SearchByTitle", con))
+            using (var da = new SqlDataAdapter(cmd))
+            {
+                cmd.Parameters.Add("@Title", SqlDbType.NVarChar).Value = "";
+                cmd.CommandType = CommandType.StoredProcedure;
+                da.Fill(table);
+            }
+            List<List<string>> array_list = new List<List<string>>();
+
+            foreach (DataRow row in table.Rows)
+            {
+                List<string> temp = new List<string>();
+                temp.Add(row["ISBN"].ToString());
+                temp.Add(row["Title"].ToString());
+                temp.Add(row["Author"].ToString());
+                temp.Add(row["Category"].ToString());
+                temp.Add(row["Quantity_Available"].ToString());
+                temp.Add(row["Location"].ToString());
+                temp.Add(row["Publisher"].ToString());
+                temp.Add(row["Year_Published"].ToString());
+                temp.Add(row["Id"].ToString());
+                array_list.Add(temp);
+            }
+            return array_list;
+        }
+
+        public string UpdateBook(string ISBN,int Qty,string Loc)
+        {
+            SqlConnection conn = null;
+
+            conn = new SqlConnection(@"Data Source = (LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\LMS_DB.mdf;Integrated Security = True");
+            conn.Open();
+            SqlCommand cmd = new SqlCommand("dbo.Administrator_UpdateBook", conn);
+            cmd.CommandType = CommandType.StoredProcedure;
+            
+            cmd.Parameters.Add("@ISBN", SqlDbType.NVarChar).Value = ISBN;
+            cmd.Parameters.Add("@Quantity", SqlDbType.Int).Value =  Qty;
+            cmd.Parameters.Add("@Location", SqlDbType.NVarChar).Value = Loc;
+
+            cmd.ExecuteNonQuery();
+            return "Successfully updated the book";
+        }
+
+        public List<List<string>> SearchISBN(string term)
+        {
+            SqlConnection con;
+            DataTable table = new DataTable();
+            con = new SqlConnection(@"Data Source = (LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\LMS_DB.mdf;Integrated Security = True");
+            using (var cmd = new SqlCommand("SearchByISBN", con))
+            using (var da = new SqlDataAdapter(cmd))
+            {
+                cmd.Parameters.Add("@ISBN", SqlDbType.NVarChar).Value = term;
+                cmd.CommandType = CommandType.StoredProcedure;
+                da.Fill(table);
+            }
+            List<List<string>> array_list = new List<List<string>>();
+
+            foreach (DataRow row in table.Rows)
+            {
+                List<string> temp = new List<string>();
+                temp.Add(row["ISBN"].ToString());
+                temp.Add(row["Title"].ToString());
+                temp.Add(row["Author"].ToString());
+                temp.Add(row["Quantity_Available"].ToString());
+                temp.Add(row["Location"].ToString());
+                
+                array_list.Add(temp);
+            }
+            return array_list;
         }
     }
 }

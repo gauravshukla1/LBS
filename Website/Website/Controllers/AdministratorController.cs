@@ -54,5 +54,39 @@ namespace Website.Controllers
             
             return ViewIfAdminLoggedIn();
         }
+
+        [HttpGet]
+        public ActionResult UpdateDeleteBook()
+        {
+            Models.LibraryAdministrator admin = new Models.LibraryAdministrator(Convert.ToString(Session["EmailID"]));
+            ViewBag.Results = admin.AllBooks();
+            return ViewIfAdminLoggedIn();
+        }
+
+        [HttpPost]
+        public ActionResult UpdateDeleteBook(Models.LibraryAdministrator admin)
+        {
+            string msg = "Default";
+            msg = admin.UpdateBook(Request.QueryString["ISBN"],admin.Quantity,admin.Location);
+            ViewBag.Message = msg;
+            return ViewIfAdminLoggedIn();
+        }
+
+        [HttpGet]
+        public ActionResult UpdateBook()
+        {
+            Models.LibraryAdministrator admin = new Models.LibraryAdministrator();
+            Session["Message"] = admin.UpdateBook(Request.QueryString["ISBN"], admin.Quantity, admin.Location);
+            return RedirectToAction("UpdatedBook");
+        }
+
+        [HttpGet]
+        public ActionResult UpdatedBook(Models.LibraryAdministrator admin)
+        {
+
+            ViewBag.Book = admin.SearchISBN(Convert.ToString(Session["Message"]));
+            
+            return ViewIfAdminLoggedIn();
+        }
     }
 }

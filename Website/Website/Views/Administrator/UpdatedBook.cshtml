@@ -1,0 +1,35 @@
+﻿@model Website.Models.LibraryAdministrator
+@{
+    ViewBag.Title = "UpdatedBook";
+    Layout = "~/Views/Administrator/_Layout.cshtml";
+}
+
+<h2>UpdatedBook</h2>
+
+<h2>UpdateBook</h2>
+<p style="color:dodgerblue">@Session["Message"]</p>
+@{Session.Remove("Message");}
+
+<table class="table table-responsive table-striped">
+    <tr>
+        <th>ISBN</th>
+        <th>Title</th>
+        <th>Author</th>
+        <th>Qty</th>
+        <th>Location</th>
+    </tr>
+    @foreach (List<string> tmp in ViewBag.Book)
+    {
+        <tr>
+            <td>@tmp.ElementAt(0)</td>
+            <td>@tmp.ElementAt(1)</td>
+            <td>@tmp.ElementAt(2)</td>
+            <td>@tmp.ElementAt(3).AsDateTime().ToString("M-d-yyyy")</td>
+            <td>@tmp.ElementAt(4).AsDateTime().ToString("M-d-yyyy")</td>
+            <td><button onclick="window.location='/Librarian/ReturnBook?ISBN=@tmp.ElementAt(1)&emailid=@tmp.ElementAt(0)'" class="btn-danger">Return</button></td>
+        </tr>
+    }
+</table>
+
+
+

@@ -145,6 +145,9 @@
     <Content Include="Views\Administrator\_Layout.cshtml" />
     <Content Include="Views\Administrator\AddBook.cshtml" />
     <Content Include="Views\Administrator\AddLibrarian.cshtml" />
+    <Content Include="Views\Administrator\UpdateDeleteBook.cshtml" />
+    <Content Include="Views\Administrator\UpdateBook.cshtml" />
+    <Content Include="Views\Administrator\UpdatedBook.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

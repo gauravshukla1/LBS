@@ -1,0 +1,35 @@
+﻿
+@model Website.Models.LibraryAdministrator
+@{
+    ViewBag.Title = "UpdateDeleteBook";
+    Layout = "~/Views/Administrator/_Layout.cshtml";
+}
+
+<h2>Books</h2>
+
+<table class="table table-responsive table-striped">
+    <tr>
+        <th>ISBN</th>
+        <th>Title</th>
+        <th>Author</th>
+        <th>Category</th>
+        <th>Qty</th>
+        <th>Location</th>
+        <th>Update</th>
+        <th>Delete</th>
+    </tr>
+    @foreach (List<string> tmp in ViewBag.Results)
+    {
+        <tr>
+            <td>@tmp.ElementAt(0)</td>
+            <td>@tmp.ElementAt(1)</td>
+            <td>@tmp.ElementAt(2)</td>
+            <td>@tmp.ElementAt(3)</td>
+            <td>@Html.TextBoxFor(model => model.Quantity, new { @Value = @tmp.ElementAt(4) })</td>
+            <td>@Html.TextBoxFor(model => model.Location, new { @Value = @tmp.ElementAt(5) })</td>
+            <td><button onclick="window.location='/Administrator/UpdateBook?ISBN=@tmp.ElementAt(0)'" class="btn-primary">Update</button></td>
+            <td><button onclick="window.location='/Administrator/DeleteBook?ISBN=@tmp.ElementAt(0)'" class="btn-danger">Delete</button></td>
+        </tr>
+    }
+</table>
+
