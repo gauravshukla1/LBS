@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace Website.Controllers
@@ -10,15 +7,15 @@ namespace Website.Controllers
     {
         public ActionResult ViewIfAdminLoggedIn()
         {
-            string login_type = Convert.ToString(Session["login_type"]);
+            String login_type = Convert.ToString(Session["login_type"]);
             if (login_type != null)
             {
                 if (login_type == "Student") { return RedirectToAction("Index", "Student"); }
                 if (login_type == "Librarian") { return RedirectToAction("Index", "Librarian"); }
                 if (login_type == "Admin") { return View(); }
-                return RedirectToAction("LogOut", "User"); 
+                return RedirectToAction("LogOut", "User");
             }
-                return RedirectToAction("Index","User");
+            return RedirectToAction("Index", "User");
         }
         // GET: Adminstrator
         public ActionResult Index()
@@ -33,9 +30,9 @@ namespace Website.Controllers
         }
 
         [HttpPost]
-        public ActionResult AddBook(Models.LibraryAdministrator admin)
+        public ActionResult AddBook(Models.Book book)
         {
-            string msg = admin.AddBook();
+            String msg = book.AddBook(book);
             ViewBag.Message = msg;
             return ViewIfAdminLoggedIn();
         }
@@ -47,46 +44,47 @@ namespace Website.Controllers
         }
 
         [HttpPost]
-        public ActionResult AddLibrarian(Models.LibraryAdministrator admin)
+        public ActionResult AddLibrarian(Models.LibraryLibrarian librarian)
         {
-            string msg = admin.AddLibrarian();
-            ViewBag.Message = msg;
-            
+            Models.LibraryAdministrator admin = new Models.LibraryAdministrator(Convert.ToString(Session["EmailID"]));
+            ViewBag.Message = admin.AddLibrarian(librarian);
             return ViewIfAdminLoggedIn();
         }
 
         [HttpGet]
         public ActionResult UpdateDeleteBook()
         {
-            Models.LibraryAdministrator admin = new Models.LibraryAdministrator(Convert.ToString(Session["EmailID"]));
-            ViewBag.Results = admin.AllBooks();
+            Models.Book book = new Models.Book();
+            ViewBag.Results = book.AllBooks();
             return ViewIfAdminLoggedIn();
         }
 
         [HttpPost]
-        public ActionResult UpdateDeleteBook(Models.LibraryAdministrator admin)
+        public ActionResult UpdateDeleteBook(Models.Book book)
         {
-            string msg = "Default";
-            msg = admin.UpdateBook(Request.QueryString["ISBN"],admin.Quantity,admin.Location);
-            ViewBag.Message = msg;
+            if (Request.Form["delete"] == "yes") { ViewBag.Message = book.DeleteBook(book); }
+            else { ViewBag.Message = book.UpdateBook(book); }
+            ViewBag.Results = book.AllBooks();
             return ViewIfAdminLoggedIn();
         }
 
         [HttpGet]
-        public ActionResult UpdateBook()
+        public ActionResult UpdateDeleteLibrarian()
         {
-            Models.LibraryAdministrator admin = new Models.LibraryAdministrator();
-            Session["Message"] = admin.UpdateBook(Request.QueryString["ISBN"], admin.Quantity, admin.Location);
-            return RedirectToAction("UpdatedBook");
-        }
-
-        [HttpGet]
-        public ActionResult UpdatedBook(Models.LibraryAdministrator admin)
-        {
-
-            ViewBag.Book = admin.SearchISBN(Convert.ToString(Session["Message"]));
-            
+            Models.LibraryAdministrator admin = new Models.LibraryAdministrator(Convert.ToString(Session["EmailID"]));
+            ViewBag.Results = admin.AllLibrarians();
             return ViewIfAdminLoggedIn();
         }
+
+        [HttpPost]
+        public ActionResult UpdateDeleteLibrarian(Models.LibraryLibrarian librarian)
+        {
+            Models.LibraryAdministrator admin = new Models.LibraryAdministrator(Convert.ToString(Session["EmailID"]));
+            if (Request.Form["delete"] == "yes") { ViewBag.Message = admin.DeleteLibrarian(librarian); }
+            else { ViewBag.Message = admin.UpdateLibrarian(librarian); }
+            ViewBag.Results = admin.AllLibrarians();
+            return ViewIfAdminLoggedIn();
+        }
+
     }
 }

@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Data.SqlClient;
-using System.Linq;
-using System.Web;
-using System.Web.Configuration;
 using System.Web.Mvc;
 using System.Web.Security;
 
@@ -15,7 +8,7 @@ namespace Website.Controllers
     {
         public ActionResult ViewIfNoOneLoggedIn()
         {
-            string login_type = Convert.ToString(Session["login_type"]);
+            String login_type = Convert.ToString(Session["login_type"]);
             if (login_type != null)
             {
                 if (login_type == "Student") { return RedirectToAction("Index", "Student"); }
@@ -24,12 +17,12 @@ namespace Website.Controllers
             }
             return View();
         }
-        //private string login_type;
+        //private String login_type;
 
         // GET: User
         public ActionResult Index()
         {
-            return ViewIfNoOneLoggedIn();            
+            return ViewIfNoOneLoggedIn();
         }
 
         [HttpGet]
@@ -41,11 +34,9 @@ namespace Website.Controllers
         [HttpPost]
         public ActionResult LogIn(Models.LibraryUser user)
         {
-            if(user.Authenticate(user.EmailID,user.Password))                            
+            if (user.Authenticate(user))
             {
                 FormsAuthentication.SetAuthCookie(user.EmailID, false);
-                /*ViewBag.Message = login_type;
-                return View();*/
                 Session["login_type"] = user.login_type;
                 Session["EmailID"] = user.EmailID.Trim();
                 return RedirectToAction("Index");
@@ -57,7 +48,7 @@ namespace Website.Controllers
             return ViewIfNoOneLoggedIn();
         }
 
-        
+
         public ActionResult LogOut()
         {
             Session.Clear(); Session.Abandon();
@@ -74,9 +65,9 @@ namespace Website.Controllers
         [HttpPost]
         public ActionResult Registration(Models.LibraryUser user)
         {
-            if (user.AddUser(user.EmailID, user.Password,user.FirstName,user.LastName))
+            if (user.AddUser(user))
             {
-                return RedirectToAction("Index","User");
+                return RedirectToAction("Index", "User");
             }
             else
             {

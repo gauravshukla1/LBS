@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Net.Mail;
 using System.Data;
 using System.Data.SqlClient;
@@ -10,42 +7,61 @@ namespace Website.Models
 {
     public class LibraryUser
     {
-        protected string _EmailID;
-        protected string _Password;
-        protected string _FirstName;
-        protected string _LastName;
-        protected string _login_type;
-        protected string Books_Allowed;
-        protected string Books_Borrowed;
+        protected int _Id;
+        protected String _EmailID;
+        protected String _Password;
+        protected String _FirstName;
+        protected String _LastName;
+        protected String _login_type;
+        protected int _Books_Allowed;
+        protected int _Books_Borrowed;
 
-        public string EmailID
+        public int Id
+        {
+            get { return _Id; }
+            set { _Id = value; }
+        }
+
+        public String EmailID
         {
             get { return _EmailID; }
             set { _EmailID = value; }
         }
 
-        public string Password
+        public String Password
         {
             get { return _Password; }
             set { _Password = value; }
         }
 
-        public string FirstName
+        public String FirstName
         {
             get { return _FirstName; }
             set { _FirstName = value; }
         }
 
-        public string LastName
+        public String LastName
         {
             get { return _LastName; }
             set { _LastName = value; }
         }
 
-        public string login_type
+        public String login_type
         {
             get { return _login_type; }
             set { _login_type = value; }
+        }
+
+        public int Books_Allowed
+        {
+            get { return _Books_Allowed; }
+            set { _Books_Allowed = value; }
+        }
+
+        public int Books_Borrowed
+        {
+            get { return _Books_Borrowed; }
+            set { _Books_Borrowed = value; }
         }
 
         public LibraryUser()
@@ -67,13 +83,13 @@ namespace Website.Models
 
             foreach (DataRow row in table.Rows)
             {
-                this.FirstName=(row["FirstName"].ToString());
-                this.LastName = (row["LastName"].ToString());
-                this.EmailID = (row["Email_ID"].ToString());
-                this.Password = (row["Password"].ToString());
-                this.login_type = (row["Login_Type"].ToString());
-                this.Books_Allowed = (row["Books_Allowed"].ToString());
-                this.Books_Borrowed = (row["Books_Borrowed"].ToString());
+                this.FirstName = (row["FirstName"].ToString().Trim());
+                this.LastName = (row["LastName"].ToString().Trim());
+                this.EmailID = (row["Email_ID"].ToString().Trim());
+                this.Password = (row["Password"].ToString().Trim());
+                this.login_type = (row["Login_Type"].ToString().Trim());
+                this.Books_Allowed = Convert.ToInt32(row["Books_Allowed"].ToString().Trim());
+                this.Books_Borrowed = Convert.ToInt32(row["Books_Borrowed"].ToString().Trim());
             }
         }
 
@@ -88,14 +104,13 @@ namespace Website.Models
             //smtp.Send(message);
         }
 
-        public bool IsValid(string EmailID)
+        public bool IsValid(String EmailID)
         {
             try
             {
                 MailAddress m = new MailAddress(EmailID);
                 if (EmailID.Contains("@colorado.edu"))
                 {
-                    //AcceptEmail();
                     return true;
                 }
             }
@@ -106,7 +121,7 @@ namespace Website.Models
             return false;
         }
 
-        public bool Authenticate(String EmailID, String Password)
+        public bool Authenticate(LibraryUser user)
         {
             //return true;
             SqlConnection conn = null;
@@ -119,8 +134,8 @@ namespace Website.Models
                 SqlCommand cmd = new SqlCommand("dbo.User_Authenticate", conn);
                 cmd.CommandType = CommandType.StoredProcedure;
 
-                cmd.Parameters.Add("@email_id", SqlDbType.NVarChar).Value = EmailID;
-                cmd.Parameters.Add("@password", SqlDbType.NVarChar).Value = Password;
+                cmd.Parameters.Add("@email_id", SqlDbType.NVarChar).Value = user.EmailID;
+                cmd.Parameters.Add("@password", SqlDbType.NVarChar).Value = user.Password;
 
                 // Add the output parameter and set its properties.
                 SqlParameter outparameter = new SqlParameter();
@@ -135,7 +150,7 @@ namespace Website.Models
 
                 cmd.ExecuteNonQuery();
                 login_type = Convert.ToString(cmd.Parameters["@login_type"].Value).Trim();
-                
+
             }
             catch (Exception)
             {
@@ -158,7 +173,7 @@ namespace Website.Models
                 return false;
         }
 
-        public bool AddUser(String EmailID, String Password, String FirstName, String LastName)
+        public bool AddUser(LibraryUser user)
         {
             if (!IsValid(EmailID)) { return false; }
 
@@ -167,9 +182,9 @@ namespace Website.Models
 
             try
             {
-                if (EmailID != null && Password != null && FirstName != null && LastName != null)
+                if (user.EmailID != null && user.Password != null && user.FirstName != null && user.LastName != null)
                 {
-                    // conn = new SqlConnection(WebConfigurationManager.ConnectionStrings["_connectionstring"].ConnectionString);
+                    // conn = new SqlConnection(WebConfigurationManager.ConnectionStrings["_connectionString"].ConnectionString);
                     conn = new SqlConnection(@"Data Source = (LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\LMS_DB.mdf;Integrated Security = True");
                     conn.Open();
                     SqlCommand cmd = new SqlCommand("dbo.User_AddStudent", conn);
@@ -182,7 +197,7 @@ namespace Website.Models
                     parameter1.ParameterName = "@email_id";
                     parameter1.SqlDbType = SqlDbType.NVarChar;
                     parameter1.Direction = ParameterDirection.Input;
-                    parameter1.Value = EmailID;
+                    parameter1.Value = user.EmailID;
 
                     // Add the parameter to the Parameters collection. 
                     cmd.Parameters.Add(parameter1);
@@ -192,7 +207,7 @@ namespace Website.Models
                     parameter2.ParameterName = "@password";
                     parameter2.SqlDbType = SqlDbType.NVarChar;
                     parameter2.Direction = ParameterDirection.Input;
-                    parameter2.Value = Password;
+                    parameter2.Value = user.Password;
 
                     // Add the parameter to the Parameters collection. 
                     cmd.Parameters.Add(parameter2);
@@ -202,7 +217,7 @@ namespace Website.Models
                     parameter3.ParameterName = "@firstname";
                     parameter3.SqlDbType = SqlDbType.NVarChar;
                     parameter3.Direction = ParameterDirection.Input;
-                    parameter3.Value = FirstName;
+                    parameter3.Value = user.FirstName;
 
                     // Add the parameter to the Parameters collection. 
                     cmd.Parameters.Add(parameter3);
@@ -212,7 +227,7 @@ namespace Website.Models
                     parameter4.ParameterName = "@lastname";
                     parameter4.SqlDbType = SqlDbType.NVarChar;
                     parameter4.Direction = ParameterDirection.Input;
-                    parameter4.Value = LastName;
+                    parameter4.Value = user.LastName;
 
                     // Add the parameter to the Parameters collection. 
                     cmd.Parameters.Add(parameter4);

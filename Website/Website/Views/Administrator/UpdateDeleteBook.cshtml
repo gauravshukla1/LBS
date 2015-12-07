@@ -1,34 +1,46 @@
-﻿
-@model Website.Models.LibraryAdministrator
-@{
+﻿@{
     ViewBag.Title = "UpdateDeleteBook";
     Layout = "~/Views/Administrator/_Layout.cshtml";
 }
 
 <h2>Books</h2>
-
-<table class="table table-responsive table-striped">
+<p>@ViewBag.Message</p>
+<table class="table-striped table table-responsive">
     <tr>
-        <th>ISBN</th>
-        <th>Title</th>
-        <th>Author</th>
-        <th>Category</th>
-        <th>Qty</th>
-        <th>Location</th>
-        <th>Update</th>
-        <th>Delete</th>
+        <th class="col-sm-1" style="width:9em">ISBN</th>
+        <th class="col-sm-2">Title</th>
+        <th class="col-sm-2">Author</th>
+        <th class="col-sm-2">Category</th>
+        <th class="col-sm-1">Qty</th>
+        <th class="col-sm-1">Location</th>
+        <th class="col-sm-1">Publisher</th>
+        <th class="col-sm-1" style="width:3em">Year</th>
+
     </tr>
-    @foreach (List<string> tmp in ViewBag.Results)
+    @foreach (Website.Models.Book book in ViewBag.Results)
     {
         <tr>
-            <td>@tmp.ElementAt(0)</td>
-            <td>@tmp.ElementAt(1)</td>
-            <td>@tmp.ElementAt(2)</td>
-            <td>@tmp.ElementAt(3)</td>
-            <td>@Html.TextBoxFor(model => model.Quantity, new { @Value = @tmp.ElementAt(4) })</td>
-            <td>@Html.TextBoxFor(model => model.Location, new { @Value = @tmp.ElementAt(5) })</td>
-            <td><button onclick="window.location='/Administrator/UpdateBook?ISBN=@tmp.ElementAt(0)'" class="btn-primary">Update</button></td>
-            <td><button onclick="window.location='/Administrator/DeleteBook?ISBN=@tmp.ElementAt(0)'" class="btn-danger">Delete</button></td>
+            <td colspan="8">
+                <form id="form_@book.Id" action="/Administrator/UpdateDeleteBook" method="post" name="form_@book.Id">
+                    <input name="Id" id="id_@book.Id" value="@book.Id" type="hidden">
+                    <input name="delete" id="delete_@book.Id" value="no" type="hidden">
+                    <div class="row" style="margin-left:2px">
+                        <div class="col-sm-2 no-margin" style="width:9em"><input name="ISBN" type="text" class="form-control no-padding" value="@book.ISBN" /></div>
+                        <div class="col-sm-2 no-margin"><input name="Title" type="text" class="form-control no-padding" value="@book.Title" /></div>
+                        <div class="col-sm-2 no-margin"><input name="Author" type="text" class="form-control no-padding" value="@book.Author" /></div>
+                        <div class="col-sm-2 no-margin"><input name="Category" type="text" class="form-control no-padding" value="@book.Category" /></div>
+                        <div class="col-sm-1 no-margin"><input name="Quantity_Available" type="text" class="form-control no-padding" value="@book.Quantity_Available" /></div>
+                        <div class="col-sm-1 no-margin"><input name="Location" type="text" class="form-control no-padding" value="@book.Location" /></div>
+                        <div class="col-sm-1 no-margin"><input name="Publisher" type="text" class="form-control no-padding" value="@book.Publisher" /></div>
+                        <div class="col-sm-1 no-margin" style="width:3em"><input name="Year_Published" type="text" class="form-control no-padding" value="@book.Year_Published" /></div>
+                    </div>
+                    <div class="row" style="margin-top:10px">
+                        <div class="col-sm-6 text-right"><input value="Update" onclick="var r=confirm('Are you sure you want to edit?'); if(r) { document.getElementById('delete_@book.Id').value = 'no'; document.getElementById('form_@book.Id').submit();}" type="button" class="btn-primary" /></div>
+                        <div class="col-sm-6 text-left"><input value="Delete" onclick="var r=confirm('Are you sure you want to delete?'); if(r) { document.getElementById('delete_@book.Id').value = 'yes';document.getElementById('form_@book.Id').submit();}" type="button" class="btn-danger" /></div>
+                    </div>
+                </form>
+
+            </td>
         </tr>
     }
 </table>

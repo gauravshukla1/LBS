@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace Website.Controllers
@@ -10,7 +7,7 @@ namespace Website.Controllers
     {
         public ActionResult ViewIfLibrarianLoggedIn()
         {
-            string login_type = Convert.ToString(Session["login_type"]);
+            String login_type = Convert.ToString(Session["login_type"]);
             if (login_type != null)
             {
                 if (login_type == "Student") { return RedirectToAction("Index", "Student"); }
@@ -18,7 +15,7 @@ namespace Website.Controllers
                 if (login_type == "Admin") { return RedirectToAction("Index", "Administrator"); }
                 return RedirectToAction("LogOut", "User");
             }
-                return RedirectToAction("Index", "User");
+            return RedirectToAction("Index", "User");
         }
         // GET: Library
         public ActionResult Index()

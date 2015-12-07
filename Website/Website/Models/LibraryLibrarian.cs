@@ -1,10 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Web;
 
 namespace Website.Models
 {
@@ -15,7 +12,12 @@ namespace Website.Models
 
         }
 
-        public List<List<string>> AllCheckedOut()
+        public LibraryLibrarian() : base()
+        {
+
+        }
+
+        public List<List<String>> AllCheckedOut()
         {
             SqlConnection con;
             DataTable table = new DataTable();
@@ -26,11 +28,11 @@ namespace Website.Models
                 cmd.CommandType = CommandType.StoredProcedure;
                 da.Fill(table);
             }
-            List<List<string>> array_list = new List<List<string>>();
+            List<List<String>> array_list = new List<List<String>>();
 
             foreach (DataRow row in table.Rows)
             {
-                List<string> temp = new List<string>();
+                List<String> temp = new List<String>();
                 temp.Add(row["Email_ID"].ToString());
                 temp.Add(row["ISBN"].ToString());
                 temp.Add(row["Title"].ToString());
@@ -41,20 +43,17 @@ namespace Website.Models
             return array_list;
         }
 
-        public string ReturnBook(string ISBN, string emailId)
+        public String ReturnBook(String ISBN, String emailId)
         {
             SqlConnection conn = null;
-
-                conn = new SqlConnection(@"Data Source = (LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\LMS_DB.mdf;Integrated Security = True");
-                conn.Open();
-                SqlCommand cmd = new SqlCommand("dbo.Librarian_ReturnBook", conn);
-                    cmd.CommandType = CommandType.StoredProcedure;
-
-                    cmd.Parameters.Add("@email_id", SqlDbType.NVarChar).Value = emailId;
-                    cmd.Parameters.Add("@ISBN", SqlDbType.NVarChar).Value = ISBN;
-
-                    cmd.ExecuteNonQuery(); 
-                    return "Return Successful";
+            conn = new SqlConnection(@"Data Source = (LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\LMS_DB.mdf;Integrated Security = True");
+            conn.Open();
+            SqlCommand cmd = new SqlCommand("dbo.Librarian_ReturnBook", conn);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.Add("@email_id", SqlDbType.NVarChar).Value = emailId;
+            cmd.Parameters.Add("@ISBN", SqlDbType.NVarChar).Value = ISBN;
+            cmd.ExecuteNonQuery();
+            return "Return Successful";
         }
     }
 }

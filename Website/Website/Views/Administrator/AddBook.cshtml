@@ -1,31 +1,31 @@
-﻿@model Website.Models.LibraryAdministrator
+﻿@model Website.Models.Book
 @{
     ViewBag.Title = "AddBook";
     Layout = "~/Views/Administrator/_Layout.cshtml";
 }
 <p style="color:dodgerblue">
     @ViewBag.Message
-<h2>AddBook</h2>
-<div class="form-horizontal">
-    <!--<h2 style="text-transform:uppercase">Add Book</h2>-->
-    <hr />
-    @using (Html.BeginForm())
-    {
-        @Html.ValidationSummary(true, "Add Book Failed. Please try again..!!")
-        <div class="form-group">
-            <div class="col-md-10">
-                @Html.LabelFor(u => u.ISBN)
-                @Html.TextBoxFor(u => u.ISBN, new { @class = "form-control" })
-                @Html.ValidationMessageFor(u => u.ISBN)
+    <h2>AddBook</h2>
+    <div class="form-horizontal">
+        <!--<h2 style="text-transform:uppercase">Add Book</h2>-->
+        <hr />
+        @using (Html.BeginForm())
+        {
+            @Html.ValidationSummary(true, "Add Book Failed. Please try again..!!")
+            <div class="form-group">
+                <div class="col-md-10">
+                    @Html.LabelFor(u => u.ISBN)
+                    @Html.TextBoxFor(u => u.ISBN, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(u => u.ISBN)
+                </div>
             </div>
-        </div>
-        <div class="form-group">
-            <div class="col-md-10">
-                @Html.LabelFor(u => u.Title)
-                @Html.TextBoxFor(u => u.Title, new { @class = "form-control" })
-                @Html.ValidationMessageFor(u => u.Title)
+            <div class="form-group">
+                <div class="col-md-10">
+                    @Html.LabelFor(u => u.Title)
+                    @Html.TextBoxFor(u => u.Title, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(u => u.Title)
+                </div>
             </div>
-        </div>
             <div class="form-group">
                 <div class="col-md-10">
                     @Html.LabelFor(u => u.Category)
@@ -56,9 +56,9 @@
             </div>
             <div class="form-group">
                 <div class="col-md-10">
-                    @Html.LabelFor(u => u.Quantity)
-                    @Html.TextBoxFor(u => u.Quantity, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(u => u.Quantity)
+                    @Html.LabelFor(u => u.Quantity_Available)
+                    @Html.TextBoxFor(u => u.Quantity_Available, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(u => u.Quantity_Available)
                 </div>
             </div>
             <div class="form-group">
@@ -69,5 +69,5 @@
                 </div>
             </div>
             <input type="submit" value="AddBook" class="btn btn-default" />
-    }
-</div>
+        }
+    </div>
