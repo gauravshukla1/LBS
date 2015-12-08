@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Web.Mvc;
+using Website.Models;
 
 namespace Website.Controllers
 {
@@ -24,14 +25,12 @@ namespace Website.Controllers
         }
         public ActionResult ReturnBook()
         {
-            Models.LibraryLibrarian librarian = new Models.LibraryLibrarian(Convert.ToString(Session["EmailID"]));
-            Session["Message"] = librarian.ReturnBook(Request.QueryString["ISBN"], Request.QueryString["emailid"]);
+            Session["Message"] = Singleton.Instance.librarian.ReturnBook(Request.QueryString["Id"]);
             return RedirectToAction("AllCheckedOut", "Librarian");
         }
         public ActionResult AllCheckedOut()
         {
-            Models.LibraryLibrarian librarian = new Models.LibraryLibrarian(Convert.ToString(Session["EmailID"]));
-            ViewBag.Results = librarian.AllCheckedOut();
+            ViewBag.Results = Singleton.Instance.librarian.AllCheckedOut();
             return ViewIfLibrarianLoggedIn();
         }
     }

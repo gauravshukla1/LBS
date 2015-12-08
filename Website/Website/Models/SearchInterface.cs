@@ -79,7 +79,7 @@ namespace Website.Models
     /// <summary>Extended to Search w.r.t Category.</summary>
     class SearchByCategory : SearchService
     {
-        public SearchByCategory() :base("Category")
+        public SearchByCategory() : base("Category")
         {
         }
     }

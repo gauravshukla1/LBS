@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Web.Mvc;
+using Website.Models;
 
 namespace Website.Controllers
 {
@@ -20,7 +21,7 @@ namespace Website.Controllers
         // GET: Student
         public ActionResult Index()
         {
-            Models.LibraryStudent student = new Models.LibraryStudent(Convert.ToString(Session["EmailID"]));
+            LibraryStudent student = new LibraryStudent(Convert.ToString(Session["EmailID"]));
             ViewBag.Message = student.FirstName + " " + student.LastName;
             return ViewIfStudentLoggedIn();
         }
@@ -28,22 +29,21 @@ namespace Website.Controllers
         [HttpGet]
         public ActionResult Search()
         {
-            Models.Book book=new Models.Book();
-            ViewBag.Results = book.Search(Request.QueryString["Term"], Request.QueryString["Criteria"]);
+            ViewBag.Results = Singleton.Instance.book.Search(Request.QueryString["Term"], Request.QueryString["Criteria"]);
             return ViewIfStudentLoggedIn();
         }
 
         [HttpGet]
         public ActionResult CheckOut()
         {
-            Models.LibraryStudent student = new Models.LibraryStudent(Convert.ToString(Session["EmailID"]));
+            LibraryStudent student = new LibraryStudent(Convert.ToString(Session["EmailID"]));
             Session["Message"] = student.CheckOut(Request.QueryString["ISBN"]);
             return RedirectToAction("AllCheckedOut", "Student");
         }
 
         public ActionResult AllCheckedOut()
         {
-            Models.LibraryStudent student = new Models.LibraryStudent(Convert.ToString(Session["EmailID"]));
+            LibraryStudent student = new LibraryStudent(Convert.ToString(Session["EmailID"]));
             ViewBag.Results = student.AllCheckedOut();
             return ViewIfStudentLoggedIn();
         }

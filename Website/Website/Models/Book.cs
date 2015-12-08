@@ -84,7 +84,8 @@ namespace Website.Models
 
         public String AddBook(Book book)
         {
-            try { 
+            try
+            {
                 SqlConnection conn = null;
                 conn = new SqlConnection(@"Data Source = (LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\LMS_DB.mdf;Integrated Security = True");
                 conn.Open();
@@ -163,10 +164,10 @@ namespace Website.Models
 
         public List<Book> AllBooks()
         {
-            return Search("","");
+            return Search("", "");
         }
 
-        public List<Book> Search(String term,String criteria)
+        public List<Book> Search(String term, String criteria)
         {
             Website.Models.Search search;
             switch (criteria)

@@ -33,25 +33,25 @@ namespace Website.Models
             foreach (DataRow row in table.Rows)
             {
                 List<String> temp = new List<String>();
-                temp.Add(row["Email_ID"].ToString());
-                temp.Add(row["ISBN"].ToString());
-                temp.Add(row["Title"].ToString());
-                temp.Add(row["Checkout_Date"].ToString());
-                temp.Add(row["Due_Date"].ToString());
+                temp.Add(row["Id"].ToString().Trim());
+                temp.Add(row["Email_ID"].ToString().Trim());
+                temp.Add(row["ISBN"].ToString().Trim());
+                temp.Add(row["Title"].ToString().Trim());
+                temp.Add(row["Checkout_Date"].ToString().Trim());
+                temp.Add(row["Due_Date"].ToString().Trim());
                 array_list.Add(temp);
             }
             return array_list;
         }
 
-        public String ReturnBook(String ISBN, String emailId)
+        public String ReturnBook(String Id)
         {
             SqlConnection conn = null;
             conn = new SqlConnection(@"Data Source = (LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\LMS_DB.mdf;Integrated Security = True");
             conn.Open();
             SqlCommand cmd = new SqlCommand("dbo.Librarian_ReturnBook", conn);
             cmd.CommandType = CommandType.StoredProcedure;
-            cmd.Parameters.Add("@email_id", SqlDbType.NVarChar).Value = emailId;
-            cmd.Parameters.Add("@ISBN", SqlDbType.NVarChar).Value = ISBN;
+            cmd.Parameters.Add("@Id", SqlDbType.NVarChar).Value = Id;
             cmd.ExecuteNonQuery();
             return "Return Successful";
         }

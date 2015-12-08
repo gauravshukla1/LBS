@@ -55,40 +55,49 @@ namespace Website.Models
                 conn.Open();
                 SqlCommand cmd = new SqlCommand("dbo.Librarian_CheckBorrowable", conn);
                 cmd.CommandType = CommandType.StoredProcedure;
-
                 cmd.Parameters.Add("@email_id", SqlDbType.NVarChar).Value = this.EmailID;
                 // Add the output parameter and set its properties.
                 SqlParameter outparameter = new SqlParameter();
                 outparameter.ParameterName = "@Number";
                 outparameter.SqlDbType = SqlDbType.Int;
-                //outparameter.Size = 12;
                 outparameter.Direction = ParameterDirection.Output;
-
-
-                // Add the parameter to the Parameters collection. 
                 cmd.Parameters.Add(outparameter);
-
                 cmd.ExecuteNonQuery();
                 int returnValue = Convert.ToInt32(cmd.Parameters["@Number"].Value);
-
-                if (returnValue == 0)
+                if (returnValue < 1)
                     return "Cannot borrow any more books";
                 else
                 {
-                    cmd = new SqlCommand("dbo.Student_Checkout", conn);
+                    conn = new SqlConnection(@"Data Source = (LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\LMS_DB.mdf;Integrated Security = True");
+                    conn.Open();
+                    cmd = new SqlCommand("dbo.Librarian_CheckInventory", conn);
                     cmd.CommandType = CommandType.StoredProcedure;
-
-                    cmd.Parameters.Add("@email_id", SqlDbType.NVarChar).Value = this.EmailID;
                     cmd.Parameters.Add("@ISBN", SqlDbType.NVarChar).Value = ISBN;
-
-                    SqlParameter retValue = cmd.Parameters.Add("return", SqlDbType.Int);
-                    retValue.Direction = ParameterDirection.ReturnValue;
+                    // Add the output parameter and set its properties.
+                    outparameter = new SqlParameter();
+                    outparameter.ParameterName = "@Number";
+                    outparameter.SqlDbType = SqlDbType.Int;
+                    outparameter.Direction = ParameterDirection.Output;
+                    // Add the parameter to the Parameters collection. 
+                    cmd.Parameters.Add(outparameter);
                     cmd.ExecuteNonQuery();
-                    int returnvalue = (int)retValue.Value;
+                    returnValue = Convert.ToInt32(cmd.Parameters["@Number"].Value);
+                    if (returnValue < 1)
+                        return "Book not available";
+                    else { 
+                        cmd = new SqlCommand("dbo.Student_Checkout", conn);
+                        cmd.CommandType = CommandType.StoredProcedure;
 
-                    if (returnvalue == 0)
-                        return "CheckOut Successful";
+                        cmd.Parameters.Add("@email_id", SqlDbType.NVarChar).Value = this.EmailID;
+                        cmd.Parameters.Add("@ISBN", SqlDbType.NVarChar).Value = ISBN;
 
+                        SqlParameter retValue = cmd.Parameters.Add("return", SqlDbType.Int);
+                        retValue.Direction = ParameterDirection.ReturnValue;
+                        cmd.ExecuteNonQuery();
+                        int returnvalue = (int)retValue.Value;
+                        if (returnvalue == 0)
+                            return "CheckOut Successful";
+                    }
                 }
             }
             catch (Exception)

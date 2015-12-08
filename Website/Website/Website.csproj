@@ -116,6 +116,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Book.cs" />
+    <Compile Include="Models\Singleton.cs" />
     <Compile Include="Models\InterfaceEmail.cs" />
     <Compile Include="Models\SearchInterface.cs" />
     <Compile Include="Models\LibraryAdministrator.cs" />

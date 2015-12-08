@@ -34,7 +34,7 @@ namespace Website.Models
     class AcceptStudentEmail : SendEmail
     {
         protected static String body = "Thank you for signing up. You can now access Library Management System.";
-        public AcceptStudentEmail() : base(AcceptStudentEmail.body){}
+        public AcceptStudentEmail() : base(AcceptStudentEmail.body) { }
     }
     class RejectStudentEmail : SendEmail
     {
@@ -44,11 +44,11 @@ namespace Website.Models
     class StudentCheckOutPass : SendEmail
     {
         protected static String body = "You have successfully checked out book with ISBN=";
-        public StudentCheckOutPass(String ISBN) : base(StudentCheckOutPass.body+ISBN) { }
+        public StudentCheckOutPass(String ISBN) : base(StudentCheckOutPass.body + ISBN) { }
     }
     class StudentCheckOutFail : SendEmail
     {
         protected static String body = "You cannot checkout book with ISBN=";
-        public StudentCheckOutFail(String ISBN, String Reason) : base(StudentCheckOutFail.body+ISBN + Reason) { }
+        public StudentCheckOutFail(String ISBN, String Reason) : base(StudentCheckOutFail.body + ISBN + Reason) { }
     }
 }

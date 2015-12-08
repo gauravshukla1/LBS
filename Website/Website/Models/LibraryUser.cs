@@ -14,7 +14,7 @@ namespace Website.Models
     /// </summary>
     public class LibraryUser
     {
-        protected int _Id; 
+        protected int _Id;
         protected String _EmailID;
         protected String _Password;
         protected String _FirstName;
@@ -78,7 +78,7 @@ namespace Website.Models
             set { _Books_Borrowed = value; }
         }
 
-        
+
 
         public LibraryUser()
         {
@@ -114,7 +114,7 @@ namespace Website.Models
             try
             {
                 MailAddress m = new MailAddress(EmailID);
-                if (EmailID.Contains("@colorado.edu") && EmailID.Substring(EmailID.Length-13) == "@colorado.edu")
+                if (EmailID.Contains("@colorado.edu") && EmailID.Substring(EmailID.Length - 13) == "@colorado.edu")
                 {
                     return true;
                 }
@@ -180,7 +180,7 @@ namespace Website.Models
 
         public bool AddUser(LibraryUser user)
         {
-            if (!IsValid(EmailID)) { return false; }
+            if (!IsValid(user.EmailID)) { return false; }
 
             SqlConnection conn = null;
             SqlDataReader rdr = null;
@@ -244,7 +244,7 @@ namespace Website.Models
                 else
                     return false;
             }
-            catch(SqlException sqlEx)
+            catch (SqlException sqlEx)
             {
                 if (sqlEx.Message.StartsWith("Violation of UNIQUE KEY constraint"))
                 {
@@ -253,7 +253,7 @@ namespace Website.Models
                 else
                     throw;
             }
-            catch(Exception)
+            catch (Exception)
             {
                 return false;
             }

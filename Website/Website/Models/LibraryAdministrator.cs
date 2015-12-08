@@ -19,22 +19,23 @@ namespace Website.Models
 
         public String AddLibrarian(LibraryLibrarian librarian)
         {
-            if (!librarian.IsValid(EmailID)) { return "Not valid Email ID"; }
-            try { 
-            SqlConnection conn = null;
+            if (!librarian.IsValid(librarian.EmailID)) { return "Not valid Email ID"; }
+            try
+            {
+                SqlConnection conn = null;
 
-            conn = new SqlConnection(@"Data Source = (LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\LMS_DB.mdf;Integrated Security = True");
-            conn.Open();
-            SqlCommand cmd = new SqlCommand("dbo.Administrator_AddLibrarian", conn);
-            cmd.CommandType = CommandType.StoredProcedure;
+                conn = new SqlConnection(@"Data Source = (LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\LMS_DB.mdf;Integrated Security = True");
+                conn.Open();
+                SqlCommand cmd = new SqlCommand("dbo.Administrator_AddLibrarian", conn);
+                cmd.CommandType = CommandType.StoredProcedure;
 
-            cmd.Parameters.Add("@email_id", SqlDbType.NVarChar).Value = librarian.EmailID;
-            cmd.Parameters.Add("@password", SqlDbType.NVarChar).Value = librarian.Password;
-            cmd.Parameters.Add("@firstname", SqlDbType.NVarChar).Value = librarian.FirstName;
-            cmd.Parameters.Add("@lastname", SqlDbType.NVarChar).Value = librarian.LastName;
+                cmd.Parameters.Add("@email_id", SqlDbType.NVarChar).Value = librarian.EmailID;
+                cmd.Parameters.Add("@password", SqlDbType.NVarChar).Value = librarian.Password;
+                cmd.Parameters.Add("@firstname", SqlDbType.NVarChar).Value = librarian.FirstName;
+                cmd.Parameters.Add("@lastname", SqlDbType.NVarChar).Value = librarian.LastName;
 
-            cmd.ExecuteNonQuery();
-            return "Successfully added the librarian.";
+                cmd.ExecuteNonQuery();
+                return "Successfully added the librarian.";
             }
             catch (SqlException sqlEx)
             {
@@ -49,8 +50,9 @@ namespace Website.Models
 
         public String UpdateLibrarian(LibraryLibrarian librarian)
         {
-            if (!librarian.IsValid(EmailID)) { return "Not valid Email ID"; }
-            try { 
+            if (!librarian.IsValid(librarian.EmailID)) { return "Not valid Email ID"; }
+            try
+            {
                 SqlConnection conn = null;
 
                 conn = new SqlConnection(@"Data Source = (LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\LMS_DB.mdf;Integrated Security = True");
@@ -78,7 +80,7 @@ namespace Website.Models
 
         public String DeleteLibrarian(LibraryLibrarian librarian)
         {
-            if (!librarian.IsValid(EmailID)) { return "Not valid Email ID"; }
+            if (!librarian.IsValid(librarian.EmailID)) { return "Not valid Email ID"; }
 
             SqlConnection conn = null;
 

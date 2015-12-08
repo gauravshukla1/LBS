@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Web.Mvc;
 using System.Web.Security;
+using Website.Models;
 
 namespace Website.Controllers
 {
@@ -11,7 +12,7 @@ namespace Website.Controllers
             String login_type = Convert.ToString(Session["login_type"]);
             if (login_type != null)
             {
-                if (login_type == "Student") { return RedirectToAction("Index", "Student"); }
+                if (login_type == "Student") { Singleton.Instance.MsgForLibrarian = "Last Student Logged in at " + DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss.fff"); return RedirectToAction("Index", "Student"); }
                 if (login_type == "Librarian") { return RedirectToAction("Index", "Librarian"); }
                 if (login_type == "Admin") { return RedirectToAction("Index", "Administrator"); }
             }
@@ -32,7 +33,7 @@ namespace Website.Controllers
         }
 
         [HttpPost]
-        public ActionResult LogIn(Models.LibraryUser user)
+        public ActionResult LogIn(LibraryUser user)
         {
             if (ModelState.IsValid)
             {
@@ -48,7 +49,7 @@ namespace Website.Controllers
                     ModelState.AddModelError("", "Log In Data is Incorrect");
                 }
             }
-            
+
             return ViewIfNoOneLoggedIn();
         }
 
@@ -63,12 +64,12 @@ namespace Website.Controllers
         [HttpGet]
         public ActionResult Registration()
         {
-            
+
             return ViewIfNoOneLoggedIn();
         }
 
         [HttpPost]
-        public ActionResult Registration(Models.LibraryUser user)
+        public ActionResult Registration(LibraryUser user)
         {
             if (ModelState.IsValid)
             {
