@@ -5,6 +5,12 @@ using System.Data.SqlClient;
 
 namespace Website.Models
 {
+    /// <summary>
+    /// Basic User Model as used in database user_credentials table.
+    /// There is a blank constructor for use with web forms
+    /// The other constructor is used to populate other variables from the database by sending email_id
+    /// 
+    /// </summary>
     public class LibraryUser
     {
         protected int _Id;
@@ -91,17 +97,6 @@ namespace Website.Models
                 this.Books_Allowed = Convert.ToInt32(row["Books_Allowed"].ToString().Trim());
                 this.Books_Borrowed = Convert.ToInt32(row["Books_Borrowed"].ToString().Trim());
             }
-        }
-
-        private void AcceptEmail()
-        {
-            MailMessage message = new MailMessage();
-            message.To.Add(EmailID);
-            message.Subject = "Acoount created";
-            message.From = new MailAddress("nine8439@colorado.edu");
-            message.Body = "Congratulations you have sucessfully registered";
-            System.Net.Mail.SmtpClient smtp = new System.Net.Mail.SmtpClient("SetThisLater");
-            //smtp.Send(message);
         }
 
         public bool IsValid(String EmailID)

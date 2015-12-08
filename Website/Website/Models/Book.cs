@@ -5,6 +5,12 @@ using System.Data.SqlClient;
 
 namespace Website.Models
 {
+    /// <summary>
+    /// Basic book model as used in Database in the inventory table.
+    /// This has methods AddBook, UpdateBook and DeleteBook that connect to database and do these functions.
+    /// The all book method makes use of the search interface and returns all book.
+    /// The Search method makes use of the Search interface.
+    /// </summary>
     public class Book
     {
         protected int _Id;
@@ -134,36 +140,20 @@ namespace Website.Models
 
         public List<Book> AllBooks()
         {
-            //Displaying all books in the library for Admin to update or delete accordingly
-            SqlConnection con;
-            DataTable table = new DataTable();
-            con = new SqlConnection(@"Data Source = (LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\LMS_DB.mdf;Integrated Security = True");
-            using (var cmd = new SqlCommand("SearchByTitle", con))
-            using (var da = new SqlDataAdapter(cmd))
-            {
-                cmd.Parameters.Add("@Title", SqlDbType.NVarChar).Value = "";
-                cmd.CommandType = CommandType.StoredProcedure;
-                da.Fill(table);
-            }
-            List<Book> Book_Array = new List<Book>();
-
-            foreach (DataRow row in table.Rows)
-            {
-                Book temp = new Book();
-                temp.Id = Convert.ToInt32(row["Id"].ToString().Trim());
-                temp.ISBN = (row["ISBN"].ToString().Trim());
-                temp.Title = (row["Title"].ToString().Trim());
-                temp.Author = (row["Author"].ToString().Trim());
-                temp.Category = (row["Category"].ToString().Trim());
-                temp.Quantity_Available = Convert.ToInt32(row["Quantity_Available"].ToString().Trim());
-                temp.Location = (row["Location"].ToString().Trim());
-                temp.Publisher = (row["Publisher"].ToString().Trim());
-                temp.Year_Published = Convert.ToInt32(row["Year_Published"].ToString().Trim());
-                Book_Array.Add(temp);
-            }
-            return Book_Array;
+            return Search("","");
         }
 
-
+        public List<Book> Search(String term,String criteria)
+        {
+            Website.Models.Search search;
+            switch (criteria)
+            {
+                case "Author": search = new Models.SearchByAuthor(); break;
+                case "ISBN": search = new Models.SearchByISBN(); break;
+                case "Category": search = new Models.SearchByCategory(); break;
+                default: search = new Models.SearchByTitle(); break;
+            }
+            return search.Search(term);
+        }
     }
 }

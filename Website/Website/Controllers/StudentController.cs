@@ -28,12 +28,8 @@ namespace Website.Controllers
         [HttpGet]
         public ActionResult Search()
         {
-            Website.Models.Search search;
-            if (Request.QueryString["Criteria"] == "Author") { search = new Models.SearchByAuthor(Request.QueryString["Term"]); }
-            else if (Request.QueryString["Criteria"] == "ISBN") { search = new Models.SearchByISBN(Request.QueryString["Term"]); }
-            else if (Request.QueryString["Criteria"] == "Category") { search = new Models.SearchByCategory(Request.QueryString["Term"]); }
-            else { search = new Models.SearchByTitle(Request.QueryString["Term"]); }
-            ViewBag.Results = search.Search();
+            Models.Book book=new Models.Book();
+            ViewBag.Results = book.Search(Request.QueryString["Term"], Request.QueryString["Criteria"]);
             return ViewIfStudentLoggedIn();
         }
 
