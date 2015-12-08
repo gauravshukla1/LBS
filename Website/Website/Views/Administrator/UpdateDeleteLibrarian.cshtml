@@ -1,0 +1,35 @@
+﻿@{
+    ViewBag.Title = "UpdateDeleteLibrarian";
+    Layout = "~/Views/Administrator/_Layout.cshtml";
+}
+
+<h2>Librarians</h2>
+<p>@ViewBag.Message</p>
+<table class="table-striped table table-responsive">
+    <tr>
+        <th class="col-sm-3">First Name</th>
+        <th class="col-sm-3">Last Name</th>
+        <th class="col-sm-3">Email ID</th>
+        <th class="col-sm-2">Update</th>
+        <th class="col-sm-2">Delete</th>
+    </tr>
+    @foreach (Website.Models.LibraryLibrarian librarian in ViewBag.Results)
+    {
+        <tr>
+            <td colspan="5">
+                <form id="form_@librarian.Id" action="/Administrator/UpdateDeleteLibrarian" method="post" name="form_@librarian.Id">
+                    <input name="ID" id="id_@librarian.Id" value="@librarian.Id" type="hidden">
+                    <input name="delete" id="delete_@librarian.Id" value="no" type="hidden">
+                    <div class="row" style="margin-left:2px">
+                        <div class="col-sm-3 no-margin" style="width:9em"><input name="FirstName" type="text" class="form-control no-padding" value="@librarian.FirstName" /></div>
+                        <div class="col-sm-3 no-margin"><input name="LastName" type="text" class="form-control no-padding" value="@librarian.LastName" /></div>
+                        <div class="col-sm-3 no-margin"><input name="EmailID" type="text" class="form-control no-padding" value="@librarian.EmailID" /></div>
+                        <div class="col-sm-2 text-right"><input value="Update" onclick="var r=confirm('Are you sure you want to edit?'); if(r) { document.getElementById('delete_@librarian.Id').value = 'no'; document.getElementById('form_@librarian.Id').submit();}" type="button" class="btn-primary" /></div>
+                        <div class="col-sm-2 text-right"><input value="Delete" onclick="var r=confirm('Are you sure you want to delete?'); if(r) { document.getElementById('delete_@librarian.Id').value = 'yes';document.getElementById('form_@librarian.Id').submit();}" type="button" class="btn-danger" /></div>
+                    </div>
+                </form>
+
+            </td>
+        </tr>
+    }
+</table>
