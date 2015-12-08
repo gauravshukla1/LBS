@@ -169,13 +169,13 @@ namespace Website.Models
 
         public List<Book> Search(String term, String criteria)
         {
-            Website.Models.Search search;
+            Search search;
             switch (criteria)
             {
-                case "Author": search = new Models.SearchByAuthor(); break;
-                case "ISBN": search = new Models.SearchByISBN(); break;
-                case "Category": search = new Models.SearchByCategory(); break;
-                default: search = new Models.SearchByTitle(); break;
+                case "Author"   : search = new SearchByAuthor();    break;
+                case "ISBN"     : search = new SearchByISBN();      break;
+                case "Category" : search = new SearchByCategory();  break;
+                default         : search = new SearchByTitle();     break;
             }
             return search.Search(term);
         }
