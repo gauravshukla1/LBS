@@ -2,6 +2,7 @@
 using System.Net.Mail;
 using System.Data;
 using System.Data.SqlClient;
+using System.ComponentModel.DataAnnotations;
 
 namespace Website.Models
 {
@@ -13,7 +14,7 @@ namespace Website.Models
     /// </summary>
     public class LibraryUser
     {
-        protected int _Id;
+        protected int _Id; 
         protected String _EmailID;
         protected String _Password;
         protected String _FirstName;
@@ -21,31 +22,38 @@ namespace Website.Models
         protected String _login_type;
         protected int _Books_Allowed;
         protected int _Books_Borrowed;
-
         public int Id
         {
             get { return _Id; }
             set { _Id = value; }
         }
 
+        [Required(ErrorMessage = "Email ID field cannot be kept blank")]
+        [EmailAddress]
+        [StringLength(35, MinimumLength = 14)]
         public String EmailID
         {
             get { return _EmailID; }
             set { _EmailID = value; }
         }
 
+        [Required(ErrorMessage = "Password field cannot be kept blank")]
+        [DataType(DataType.Password)]
+        [StringLength(25, MinimumLength = 3)]
         public String Password
         {
             get { return _Password; }
             set { _Password = value; }
         }
 
+        [Required(ErrorMessage = "First Name field cannot be kept blank")]
         public String FirstName
         {
             get { return _FirstName; }
             set { _FirstName = value; }
         }
 
+        [Required(ErrorMessage = "Last Name field cannot be kept blank")]
         public String LastName
         {
             get { return _LastName; }
@@ -69,6 +77,8 @@ namespace Website.Models
             get { return _Books_Borrowed; }
             set { _Books_Borrowed = value; }
         }
+
+        
 
         public LibraryUser()
         {
@@ -104,7 +114,7 @@ namespace Website.Models
             try
             {
                 MailAddress m = new MailAddress(EmailID);
-                if (EmailID.Contains("@colorado.edu"))
+                if (EmailID.Contains("@colorado.edu") && EmailID.Substring(EmailID.Length-13) == "@colorado.edu")
                 {
                     return true;
                 }
@@ -233,6 +243,19 @@ namespace Website.Models
                 }
                 else
                     return false;
+            }
+            catch(SqlException sqlEx)
+            {
+                if (sqlEx.Message.StartsWith("Violation of UNIQUE KEY constraint"))
+                {
+                    return false;
+                }
+                else
+                    throw;
+            }
+            catch(Exception)
+            {
+                return false;
             }
             finally
             {
