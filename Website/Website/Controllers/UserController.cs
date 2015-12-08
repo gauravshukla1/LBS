@@ -34,17 +34,21 @@ namespace Website.Controllers
         [HttpPost]
         public ActionResult LogIn(Models.LibraryUser user)
         {
-            if (user.Authenticate(user))
+            if (ModelState.IsValid)
             {
-                FormsAuthentication.SetAuthCookie(user.EmailID, false);
-                Session["login_type"] = user.login_type;
-                Session["EmailID"] = user.EmailID.Trim();
-                return RedirectToAction("Index");
+                if (user.Authenticate(user))
+                {
+                    FormsAuthentication.SetAuthCookie(user.EmailID, false);
+                    Session["login_type"] = user.login_type;
+                    Session["EmailID"] = user.EmailID.Trim();
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Log In Data is Incorrect");
+                }
             }
-            else
-            {
-                ModelState.AddModelError("", "Log In Data is Incorrect");
-            }
+            
             return ViewIfNoOneLoggedIn();
         }
 
@@ -59,19 +63,23 @@ namespace Website.Controllers
         [HttpGet]
         public ActionResult Registration()
         {
+            
             return ViewIfNoOneLoggedIn();
         }
 
         [HttpPost]
         public ActionResult Registration(Models.LibraryUser user)
         {
-            if (user.AddUser(user))
+            if (ModelState.IsValid)
             {
-                return RedirectToAction("Index", "User");
-            }
-            else
-            {
-                ModelState.AddModelError("", "Registration Data is Incorrect");
+                if (user.AddUser(user))
+                {
+                    return RedirectToAction("Index", "User");
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Duplicate Email ID used try again with another Email ID");
+                }
             }
             return ViewIfNoOneLoggedIn();
         }
