@@ -5,6 +5,10 @@ using System.Data.SqlClient;
 
 namespace Website.Models
 {
+    /// <summary>
+    /// Library Student Model. Inherits User Model
+    /// This has methods AllCheckedOut and Checkout that connect to database and do these functions.
+    /// </summary>
     public class LibraryStudent : LibraryUser
     {
         public LibraryStudent(String emailid) : base(emailid)

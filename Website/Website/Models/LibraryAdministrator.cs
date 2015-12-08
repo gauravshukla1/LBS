@@ -5,6 +5,10 @@ using System.Data.SqlClient;
 
 namespace Website.Models
 {
+    /// <summary>
+    /// Library Administrator Model. Inherits User Model
+    /// This has methods AddLibrarian, UpdateLibrarian and DeleteLibrarian that connect to database and do these functions.
+    /// </summary>
     public class LibraryAdministrator : LibraryUser
     {
         public LibraryAdministrator(String emailid) : base(emailid)

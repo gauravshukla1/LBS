@@ -2,6 +2,9 @@
 
 namespace Website.Models
 {
+    /// <summary>
+    /// Singleton containing an instance lazy initialized composition of models
+    /// </summary>
     public class Singleton
     {
         private static Singleton instance;

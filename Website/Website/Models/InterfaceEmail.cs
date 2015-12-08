@@ -1,11 +1,23 @@
 ﻿using System;
 using System.Net.Mail;
+/// <summary>
+/// Email Functionality is Implemented using a Bridge design pattern.
+/// </summary>
+
 namespace Website.Models
 {
+    /// <summary>
+    /// Library Librarian Model. Inherits User Model
+    /// This has methods AllCheckedOut and ReturnBook that connect to database and do these functions.
+    /// </summary>
     interface Email
     {
+        /// <summary>
+        /// Email interface just declares a signature method --> Abstraction
+        /// </summary>
         void Email(String EmailID);
     }
+    /// <summary>Concrete Implementation to Email w.r.t criteria.</summary>
     class SendEmail : Email
     {
         protected String _MailBody;

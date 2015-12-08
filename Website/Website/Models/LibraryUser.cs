@@ -10,7 +10,7 @@ namespace Website.Models
     /// Basic User Model as used in database user_credentials table.
     /// There is a blank constructor for use with web forms
     /// The other constructor is used to populate other variables from the database by sending email_id
-    /// 
+    /// It has methods or Authentication and Adding a new user.
     /// </summary>
     public class LibraryUser
     {
