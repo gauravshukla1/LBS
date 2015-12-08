@@ -20,7 +20,7 @@ namespace Website.Models
         public String AddLibrarian(LibraryLibrarian librarian)
         {
             if (!librarian.IsValid(EmailID)) { return "Not valid Email ID"; }
-
+            try { 
             SqlConnection conn = null;
 
             conn = new SqlConnection(@"Data Source = (LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\LMS_DB.mdf;Integrated Security = True");
@@ -35,25 +35,45 @@ namespace Website.Models
 
             cmd.ExecuteNonQuery();
             return "Successfully added the librarian.";
+            }
+            catch (SqlException sqlEx)
+            {
+                if (sqlEx.Message.StartsWith("Violation of UNIQUE KEY constraint"))
+                {
+                    return "Duplicate Email_ID. Check again.";
+                }
+                else
+                    throw;
+            }
         }
 
         public String UpdateLibrarian(LibraryLibrarian librarian)
         {
             if (!librarian.IsValid(EmailID)) { return "Not valid Email ID"; }
+            try { 
+                SqlConnection conn = null;
 
-            SqlConnection conn = null;
+                conn = new SqlConnection(@"Data Source = (LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\LMS_DB.mdf;Integrated Security = True");
+                conn.Open();
+                SqlCommand cmd = new SqlCommand("dbo.Administrator_UpdateLibrarian", conn);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.Add("@Id", SqlDbType.NVarChar).Value = librarian.Id;
+                cmd.Parameters.Add("@Email_ID", SqlDbType.NVarChar).Value = librarian.EmailID;
+                cmd.Parameters.Add("@FirstName", SqlDbType.NVarChar).Value = librarian.FirstName;
+                cmd.Parameters.Add("@LastName", SqlDbType.NVarChar).Value = librarian.LastName;
 
-            conn = new SqlConnection(@"Data Source = (LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\LMS_DB.mdf;Integrated Security = True");
-            conn.Open();
-            SqlCommand cmd = new SqlCommand("dbo.Administrator_UpdateLibrarian", conn);
-            cmd.CommandType = CommandType.StoredProcedure;
-            cmd.Parameters.Add("@Id", SqlDbType.NVarChar).Value = librarian.Id;
-            cmd.Parameters.Add("@Email_ID", SqlDbType.NVarChar).Value = librarian.EmailID;
-            cmd.Parameters.Add("@FirstName", SqlDbType.NVarChar).Value = librarian.FirstName;
-            cmd.Parameters.Add("@LastName", SqlDbType.NVarChar).Value = librarian.LastName;
-
-            cmd.ExecuteNonQuery();
-            return "Successfully updated the librarian. Password has been reset to 1234.";
+                cmd.ExecuteNonQuery();
+                return "Successfully updated the librarian. Password has been reset to 1234.";
+            }
+            catch (SqlException sqlEx)
+            {
+                if (sqlEx.Message.StartsWith("Violation of UNIQUE KEY constraint"))
+                {
+                    return "Duplicate Email_ID. Check again.";
+                }
+                else
+                    throw;
+            }
         }
 
         public String DeleteLibrarian(LibraryLibrarian librarian)

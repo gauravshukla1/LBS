@@ -1,10 +1,22 @@
-﻿@{
+﻿@model Website.Models.Book
+@{
     ViewBag.Title = "UpdateDeleteBook";
     Layout = "~/Views/Administrator/_Layout.cshtml";
 }
 
 <h2>Books</h2>
 <p>@ViewBag.Message</p>
+
+@Html.ValidationSummary(true, "Update/Delete Book Failed. Please try again..!!", new { @class = "alert-warning" })
+@Html.ValidationMessageFor(u => u.ISBN, String.Empty, new { @class = "alert-danger" })
+@Html.ValidationMessageFor(u => u.Title, String.Empty, new { @class = "alert-danger" })
+@Html.ValidationMessageFor(u => u.Category, String.Empty, new { @class = "alert-danger" })
+@Html.ValidationMessageFor(u => u.Author, String.Empty, new { @class = "alert-danger" })
+@Html.ValidationMessageFor(u => u.Publisher, String.Empty, new { @class = "alert-danger" })
+@Html.ValidationMessageFor(u => u.Year_Published, String.Empty, new { @class = "alert-danger" })
+@Html.ValidationMessageFor(u => u.Quantity_Available, String.Empty, new { @class = "alert-danger" })
+@Html.ValidationMessageFor(u => u.Location, String.Empty, new { @class = "alert-danger" })
+
 <table class="table-striped table table-responsive">
     <tr>
         <th class="col-sm-1" style="width:9em">ISBN</th>

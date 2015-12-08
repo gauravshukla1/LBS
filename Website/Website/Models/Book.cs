@@ -84,44 +84,67 @@ namespace Website.Models
 
         public String AddBook(Book book)
         {
-            SqlConnection conn = null;
-            conn = new SqlConnection(@"Data Source = (LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\LMS_DB.mdf;Integrated Security = True");
-            conn.Open();
-            SqlCommand cmd = new SqlCommand("dbo.Administrator_AddBook", conn);
-            cmd.CommandType = CommandType.StoredProcedure;
+            try { 
+                SqlConnection conn = null;
+                conn = new SqlConnection(@"Data Source = (LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\LMS_DB.mdf;Integrated Security = True");
+                conn.Open();
+                SqlCommand cmd = new SqlCommand("dbo.Administrator_AddBook", conn);
+                cmd.CommandType = CommandType.StoredProcedure;
 
-            cmd.Parameters.Add("@ISBN", SqlDbType.NVarChar).Value = book.ISBN;
-            cmd.Parameters.Add("@Title", SqlDbType.NVarChar).Value = book.Title;
-            cmd.Parameters.Add("@Author", SqlDbType.NVarChar).Value = book.Author;
-            cmd.Parameters.Add("@Category", SqlDbType.NVarChar).Value = book.Category;
-            cmd.Parameters.Add("@Publisher", SqlDbType.NVarChar).Value = book.Publisher;
-            cmd.Parameters.Add("@Year_Published", SqlDbType.SmallInt).Value = book.Year_Published;
-            cmd.Parameters.Add("@Quantity_Available", SqlDbType.Int).Value = book.Quantity_Available;
-            cmd.Parameters.Add("@Location", SqlDbType.NVarChar).Value = book.Location;
+                cmd.Parameters.Add("@ISBN", SqlDbType.NVarChar).Value = book.ISBN;
+                cmd.Parameters.Add("@Title", SqlDbType.NVarChar).Value = book.Title;
+                cmd.Parameters.Add("@Author", SqlDbType.NVarChar).Value = book.Author;
+                cmd.Parameters.Add("@Category", SqlDbType.NVarChar).Value = book.Category;
+                cmd.Parameters.Add("@Publisher", SqlDbType.NVarChar).Value = book.Publisher;
+                cmd.Parameters.Add("@Year_Published", SqlDbType.SmallInt).Value = book.Year_Published;
+                cmd.Parameters.Add("@Quantity_Available", SqlDbType.Int).Value = book.Quantity_Available;
+                cmd.Parameters.Add("@Location", SqlDbType.NVarChar).Value = book.Location;
 
-            cmd.ExecuteNonQuery();
-            return "Successfully added the book";
+                cmd.ExecuteNonQuery();
+                return "Successfully added the book";
+            }
+            catch (SqlException sqlEx)
+            {
+                if (sqlEx.Message.StartsWith("Violation of UNIQUE KEY constraint"))
+                {
+                    return "Duplicate ISBN. Check again.";
+                }
+                else
+                    throw;
+            }
         }
 
         public String UpdateBook(Book book)
         {
-            SqlConnection conn = null;
-            conn = new SqlConnection(@"Data Source = (LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\LMS_DB.mdf;Integrated Security = True");
-            conn.Open();
-            SqlCommand cmd = new SqlCommand("dbo.Administrator_UpdateBook", conn);
-            cmd.CommandType = CommandType.StoredProcedure;
-            cmd.Parameters.Add("@Id", SqlDbType.NVarChar).Value = book.Id;
-            cmd.Parameters.Add("@ISBN", SqlDbType.NVarChar).Value = book.ISBN;
-            cmd.Parameters.Add("@Title", SqlDbType.NVarChar).Value = book.Title;
-            cmd.Parameters.Add("@Author", SqlDbType.NVarChar).Value = book.Author;
-            cmd.Parameters.Add("@Category", SqlDbType.NVarChar).Value = book.Category;
-            cmd.Parameters.Add("@Publisher", SqlDbType.NVarChar).Value = book.Publisher;
-            cmd.Parameters.Add("@Year_Published", SqlDbType.SmallInt).Value = book.Year_Published;
-            cmd.Parameters.Add("@Quantity_Available", SqlDbType.Int).Value = book.Quantity_Available;
-            cmd.Parameters.Add("@Location", SqlDbType.NVarChar).Value = book.Location;
+            try
+            {
+                SqlConnection conn = null;
+                conn = new SqlConnection(@"Data Source = (LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\LMS_DB.mdf;Integrated Security = True");
+                conn.Open();
+                SqlCommand cmd = new SqlCommand("dbo.Administrator_UpdateBook", conn);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.Add("@Id", SqlDbType.NVarChar).Value = book.Id;
+                cmd.Parameters.Add("@ISBN", SqlDbType.NVarChar).Value = book.ISBN;
+                cmd.Parameters.Add("@Title", SqlDbType.NVarChar).Value = book.Title;
+                cmd.Parameters.Add("@Author", SqlDbType.NVarChar).Value = book.Author;
+                cmd.Parameters.Add("@Category", SqlDbType.NVarChar).Value = book.Category;
+                cmd.Parameters.Add("@Publisher", SqlDbType.NVarChar).Value = book.Publisher;
+                cmd.Parameters.Add("@Year_Published", SqlDbType.SmallInt).Value = book.Year_Published;
+                cmd.Parameters.Add("@Quantity_Available", SqlDbType.Int).Value = book.Quantity_Available;
+                cmd.Parameters.Add("@Location", SqlDbType.NVarChar).Value = book.Location;
 
-            cmd.ExecuteNonQuery();
-            return "Successfully Updated the book";
+                cmd.ExecuteNonQuery();
+                return "Successfully Updated the book";
+            }
+            catch (SqlException sqlEx)
+            {
+                if (sqlEx.Message.StartsWith("Violation of UNIQUE KEY constraint"))
+                {
+                    return "Duplicate ISBN. Check again.";
+                }
+                else
+                    throw;
+            }
         }
 
         public String DeleteBook(Book book)

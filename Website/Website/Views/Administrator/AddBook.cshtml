@@ -11,61 +11,61 @@
         <hr />
         @using (Html.BeginForm())
         {
-            @Html.ValidationSummary(true, "Add Book Failed. Please try again..!!")
+            @Html.ValidationSummary(true, "Add Book Failed. Please try again..!!", new { @class = "alert-warning" })
             <div class="form-group">
                 <div class="col-md-10">
                     @Html.LabelFor(u => u.ISBN)
                     @Html.TextBoxFor(u => u.ISBN, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(u => u.ISBN)
+                    @Html.ValidationMessageFor(u => u.ISBN, String.Empty, new { @class = "alert-danger" })
                 </div>
             </div>
             <div class="form-group">
                 <div class="col-md-10">
                     @Html.LabelFor(u => u.Title)
                     @Html.TextBoxFor(u => u.Title, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(u => u.Title)
+                    @Html.ValidationMessageFor(u => u.Title, String.Empty, new { @class = "alert-danger" })
                 </div>
             </div>
             <div class="form-group">
                 <div class="col-md-10">
                     @Html.LabelFor(u => u.Category)
                     @Html.TextBoxFor(u => u.Category, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(u => u.Category)
+                    @Html.ValidationMessageFor(u => u.Category, String.Empty, new { @class = "alert-danger" })
                 </div>
             </div>
             <div class="form-group">
                 <div class="col-md-10">
                     @Html.LabelFor(u => u.Author)
                     @Html.TextBoxFor(u => u.Author, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(u => u.Author)
+                    @Html.ValidationMessageFor(u => u.Author, String.Empty, new { @class = "alert-danger" })
                 </div>
             </div>
             <div class="form-group">
                 <div class="col-md-10">
                     @Html.LabelFor(u => u.Publisher)
                     @Html.TextBoxFor(u => u.Publisher, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(u => u.Publisher)
+                    @Html.ValidationMessageFor(u => u.Publisher, String.Empty, new { @class = "alert-danger" })
                 </div>
             </div>
             <div class="form-group">
                 <div class="col-md-10">
                     @Html.LabelFor(u => u.Year_Published)
                     @Html.TextBoxFor(u => u.Year_Published, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(u => u.Year_Published)
+                    @Html.ValidationMessageFor(u => u.Year_Published, String.Empty, new { @class = "alert-danger" })
                 </div>
             </div>
             <div class="form-group">
                 <div class="col-md-10">
                     @Html.LabelFor(u => u.Quantity_Available)
                     @Html.TextBoxFor(u => u.Quantity_Available, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(u => u.Quantity_Available)
+                    @Html.ValidationMessageFor(u => u.Quantity_Available, String.Empty, new { @class = "alert-danger" })
                 </div>
             </div>
             <div class="form-group">
                 <div class="col-md-10">
                     @Html.LabelFor(u => u.Location)
                     @Html.TextBoxFor(u => u.Location, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(u => u.Location)
+                    @Html.ValidationMessageFor(u => u.Location, String.Empty, new { @class = "alert-danger" })
                 </div>
             </div>
             <input type="submit" value="AddBook" class="btn btn-default" />

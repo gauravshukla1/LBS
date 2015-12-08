@@ -10,19 +10,22 @@
     <hr />
     @using (Html.BeginForm())
     {
-        @Html.ValidationSummary(true, "Login Failed. Check your credentials")
+        @Html.ValidationSummary(true, "Login Failed. Check your credentials" , new { @class = "alert-warning" })
         <div class="form-group">
+            @Html.HiddenFor(u => u.FirstName, new { @Value = "User"  })
+            @Html.HiddenFor(u => u.LastName, new { @Value = "User" })
+
             <div class="col-md-10">
                 @Html.LabelFor(u => u.EmailID)
                 @Html.TextBoxFor(u => u.EmailID, new { @class = "form-control" })
-                @Html.ValidationMessageFor(u => u.EmailID)
+                @Html.ValidationMessageFor(u => u.EmailID, String.Empty ,new { @class = "alert-danger" })
             </div>
         </div>
         <div class="form-group">
             <div class="col-md-10">
                 @Html.LabelFor(u => u.Password)
                 @Html.PasswordFor(u => u.Password, new { @class = "form-control" })
-                @Html.ValidationMessageFor(u => u.Password)
+                @Html.ValidationMessageFor(u => u.Password, String.Empty, new { @class = "alert-danger" })
             </div>
         </div>
             <input type="submit" value="LogIn" class="btn btn-default" />

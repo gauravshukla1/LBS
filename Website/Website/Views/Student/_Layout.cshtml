@@ -48,7 +48,7 @@
                     <input name="searchtyper" type="radio" id="searchtype4" value="Category" onchange="document.getElementById('searchtypevalue').value=(this.value)">
                     <label for="searchtype4">Category</label>
                     <input name="searchtypevalue" id="searchtypevalue" type="hidden" value="Title">
-                    <input class="form-control" type='search' id='search' onkeypress="if(event.keyCode === 13){event.preventDefault();window.location='/Student/Search?Term='+document.getElementById('search').value+'&Criteria='+document.getElementById('searchtypevalue').value;}">
+                    <input class="form-control" type='search' id='search' value="@Request.QueryString["Term"]" onkeypress="if(event.keyCode === 13){event.preventDefault();window.location='/Student/Search?Term='+document.getElementById('search').value+'&Criteria='+document.getElementById('searchtypevalue').value;}">
                     <ul class="nav nav-pills nav-stacked">
                         <li><a class='alert-info' onclick="window.location='/Student/Search?Term='+document.getElementById('search').value+'&Criteria='+document.getElementById('searchtypevalue').value;">Search</a></li>
                         <li><hr /></li>

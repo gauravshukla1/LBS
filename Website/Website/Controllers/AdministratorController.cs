@@ -32,8 +32,11 @@ namespace Website.Controllers
         [HttpPost]
         public ActionResult AddBook(Models.Book book)
         {
-            String msg = book.AddBook(book);
-            ViewBag.Message = msg;
+            if (ModelState.IsValid)
+            {
+                String msg = book.AddBook(book);
+                ViewBag.Message = msg;
+            }
             return ViewIfAdminLoggedIn();
         }
 
@@ -46,8 +49,12 @@ namespace Website.Controllers
         [HttpPost]
         public ActionResult AddLibrarian(Models.LibraryLibrarian librarian)
         {
-            Models.LibraryAdministrator admin = new Models.LibraryAdministrator(Convert.ToString(Session["EmailID"]));
-            ViewBag.Message = admin.AddLibrarian(librarian);
+            if (ModelState.IsValid)
+            {
+                Models.LibraryAdministrator admin = new Models.LibraryAdministrator(Convert.ToString(Session["EmailID"]));
+                ViewBag.Message = admin.AddLibrarian(librarian);
+                
+            }
             return ViewIfAdminLoggedIn();
         }
 
@@ -62,8 +69,11 @@ namespace Website.Controllers
         [HttpPost]
         public ActionResult UpdateDeleteBook(Models.Book book)
         {
-            if (Request.Form["delete"] == "yes") { ViewBag.Message = book.DeleteBook(book); }
-            else { ViewBag.Message = book.UpdateBook(book); }
+            if (ModelState.IsValid)
+            {
+                if (Request.Form["delete"] == "yes") { ViewBag.Message = book.DeleteBook(book); }
+                else { ViewBag.Message = book.UpdateBook(book); }                
+            }
             ViewBag.Results = book.AllBooks();
             return ViewIfAdminLoggedIn();
         }
@@ -80,8 +90,11 @@ namespace Website.Controllers
         public ActionResult UpdateDeleteLibrarian(Models.LibraryLibrarian librarian)
         {
             Models.LibraryAdministrator admin = new Models.LibraryAdministrator(Convert.ToString(Session["EmailID"]));
-            if (Request.Form["delete"] == "yes") { ViewBag.Message = admin.DeleteLibrarian(librarian); }
-            else { ViewBag.Message = admin.UpdateLibrarian(librarian); }
+            if (ModelState.IsValid)
+            {
+                if (Request.Form["delete"] == "yes") { ViewBag.Message = admin.DeleteLibrarian(librarian); }
+                else { ViewBag.Message = admin.UpdateLibrarian(librarian); }
+            }
             ViewBag.Results = admin.AllLibrarians();
             return ViewIfAdminLoggedIn();
         }
