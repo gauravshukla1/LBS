@@ -1,0 +1,132 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" GroupingSetting="Access" MembersFormat="NameAndType">
+  <Class Name="Website.Models.Book">
+    <Position X="11.25" Y="0.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>BBACSAAgAQEQAEAAiCJAAABAAIAABABAAACAAAAkCAA=</HashCode>
+      <FileName>Models\Book.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Website.Models.SendEmail">
+    <Position X="5" Y="6.25" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAAAAAAAAAAAAAAAAYAAAAAAAAAAA=</HashCode>
+      <FileName>Models\InterfaceEmail.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Orientation="Right" Position="0.591" />
+  </Class>
+  <Class Name="Website.Models.AcceptStudentEmail">
+    <Position X="4" Y="9.25" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\InterfaceEmail.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Website.Models.RejectStudentEmail">
+    <Position X="6" Y="9.25" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\InterfaceEmail.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Website.Models.StudentCheckOutPass">
+    <Position X="8" Y="9.25" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\InterfaceEmail.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Website.Models.StudentCheckOutFail">
+    <Position X="1.75" Y="9.25" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\InterfaceEmail.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Website.Models.LibraryAdministrator">
+    <Position X="10.25" Y="9.25" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AQAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAEAAAAAAAAAg=</HashCode>
+      <FileName>Models\LibraryAdministrator.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Website.Models.LibraryLibrarian">
+    <Position X="13.25" Y="9.25" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAA=</HashCode>
+      <FileName>Models\LibraryLibrarian.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Website.Models.LibraryStudent">
+    <Position X="16.5" Y="9.25" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAIAAAAAAA=</HashCode>
+      <FileName>Models\LibraryStudent.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Website.Models.LibraryUser">
+    <Position X="13.5" Y="3.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>BAACAEAAAAGCAEAAAAkIAAIAAAACAAAiAAAAAAAUAQg=</HashCode>
+      <FileName>Models\LibraryUser.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Website.Models.SearchService">
+    <Position X="6.25" Y="0.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAABAAAABAAAAAAAAAAAAAAAAAAAAAAAgAAA=</HashCode>
+      <FileName>Models\SearchInterface.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Orientation="Right" Position="0.571" />
+  </Class>
+  <Class Name="Website.Models.SearchByISBN">
+    <Position X="5.25" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\SearchInterface.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Website.Models.SearchByTitle">
+    <Position X="7" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\SearchInterface.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Website.Models.SearchByCategory">
+    <Position X="8.75" Y="3" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\SearchInterface.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Website.Models.SearchByAuthor">
+    <Position X="3.5" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\SearchInterface.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Website.Models.Singleton">
+    <Position X="0.5" Y="0.5" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAABKAAAAAAEAAAAAEQQAABEBAAIAAQAAAAAAAgQA=</HashCode>
+      <FileName>Models\Singleton.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Interface Name="Website.Models.Email">
+    <Position X="7.5" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\InterfaceEmail.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Website.Models.Search">
+    <Position X="9" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAA=</HashCode>
+      <FileName>Models\SearchInterface.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
